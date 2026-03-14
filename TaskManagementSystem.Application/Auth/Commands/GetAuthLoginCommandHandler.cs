@@ -10,7 +10,7 @@ using TaskManagementSystem.Core.Entities;
 namespace TaskManagementSystem.Application.Auth.Commands;
 
 internal sealed class GetAuthLoginCommandHandler(IUserRepository userRepository)
-    : ICommandHandler<GetAuthLoginCommand, GetAuthLoginDto>
+    : ICommandHandler<GetAuthLoginCommand, GetAuthLoginDto> 
 {
     public async Task<GetAuthLoginDto> Handle(GetAuthLoginCommand request, CancellationToken cancellationToken)
     {
