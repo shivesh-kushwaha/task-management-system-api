@@ -1,0 +1,2 @@
+﻿global using TaskManagementSystem.Application.Abstractions.Commands;
+global using TaskManagementSystem.Core.Abstractions.Repositories;

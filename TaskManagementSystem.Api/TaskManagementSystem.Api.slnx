@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="../TaskManagementSystem.Application/TaskManagementSystem.Application.csproj" Id="82948bd8-d9e1-4825-a1ed-841181ff7505" />
+  <Project Path="../TaskManagementSystem.Core/TaskManagementSystem.Core.csproj" Id="1145d491-12b6-4349-af1f-9b04c160cbbe" />
+  <Project Path="../TaskManagementSystem.Infrastructure/TaskManagementSystem.Infrastructure.csproj" Id="8ce87356-c1a0-4663-bf0e-48a48e06c2c1" />
+  <Project Path="TaskManagementSystem.Api.csproj" />
+</Solution>
