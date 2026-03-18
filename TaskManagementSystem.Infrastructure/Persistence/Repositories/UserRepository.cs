@@ -1,9 +1,9 @@
 ﻿using TaskManagementSystem.Core.Abstractions.Repositories;
 using TaskManagementSystem.Infrastructure.Persistence.Context;
 
-namespace TaskManagementSystem.Infrastructure.Repositories;
+namespace TaskManagementSystem.Infrastructure.Persistence.Repositories;
 
-internal sealed class UserRepository(ApplicationDbContext dbContext): Repository<User>(dbContext), IUserRepository
+public sealed class UserRepository(ApplicationDbContext dbContext): Repository<User>(dbContext), IUserRepository
 {
     public Task<User?> GetUserByEmailAsync(string email)
     {

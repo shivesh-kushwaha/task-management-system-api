@@ -1,7 +1,7 @@
 ﻿using TaskManagementSystem.Core.Abstractions.Repositories;
 using TaskManagementSystem.Infrastructure.Persistence.Context;
 
-namespace TaskManagementSystem.Infrastructure.Repositories;
+namespace TaskManagementSystem.Infrastructure.Persistence.Repositories;
 
 public class Repository<TEntity>(ApplicationDbContext dbContext): IRepository<TEntity> where TEntity: BaseEntity
 {

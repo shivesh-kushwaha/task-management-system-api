@@ -1,2 +1,6 @@
 ﻿global using TaskManagementSystem.Application.Abstractions.Commands;
 global using TaskManagementSystem.Core.Abstractions.Repositories;
+global using TaskManagementSystem.Core.Abstractions;
+global using TaskManagementSystem.Core.Enums;
+global using TaskManagementSystem.Core.Helpers;
+global using Microsoft.EntityFrameworkCore;

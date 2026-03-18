@@ -1,6 +1,6 @@
 ﻿using TaskManagementSystem.Application.Auth.Dtos;
 
-namespace TaskManagementSystem.Application.Auth.Commands;
+namespace TaskManagementSystem.Application.Auth.Commands.GetAuthLogin;
 
 public class GetAuthLoginCommand: ICommand<GetAuthLoginDto>
 {
