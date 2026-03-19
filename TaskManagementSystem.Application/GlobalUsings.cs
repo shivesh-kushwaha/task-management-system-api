@@ -4,3 +4,4 @@ global using TaskManagementSystem.Core.Abstractions;
 global using TaskManagementSystem.Core.Enums;
 global using TaskManagementSystem.Core.Helpers;
 global using Microsoft.EntityFrameworkCore;
+global using AutoMapper;

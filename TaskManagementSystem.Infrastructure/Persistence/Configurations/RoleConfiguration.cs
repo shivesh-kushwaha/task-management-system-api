@@ -1,6 +1,6 @@
 ﻿namespace TaskManagementSystem.Infrastructure.Persistence.Configurations;
 
-public class RoleConfiguration: BaseEntityConfiguration<Role>
+public sealed class RoleConfiguration: BaseEntityConfiguration<Role>
 {
     public override void Configure(EntityTypeBuilder<Role> builder)
     {

@@ -36,11 +36,17 @@ internal sealed class GetAuthLoginCommandHandler(IUserRepository userRepository)
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppSettings.Jwt.Key));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
+        var userRoleIds = user.UserRoles.Select(x => x.RoleId);
+        var roleIds = userRoleIds.Any() 
+            ? string.Join(", ", userRoleIds) 
+            : string.Empty;
+
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
             new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
-            new Claim(JwtRegisteredClaimNames.Jti, new Guid().ToString())
+            new Claim(JwtRegisteredClaimNames.Jti, new Guid().ToString()),
+            new Claim("RoleIds", roleIds)
         };
 
         var token = new JwtSecurityToken(

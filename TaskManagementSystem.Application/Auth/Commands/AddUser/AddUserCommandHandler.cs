@@ -5,35 +5,51 @@ using TaskManagementSystem.Core.Entities;
 namespace TaskManagementSystem.Application.Auth.Commands.AddUser;
 
 internal sealed class AddUserCommandHandler(IUserRepository userRepository,
-    IUnitOfWork unitOfWork): ICommandHandler<AddUserCommand, int>
+    IUnitOfWork unitOfWork): ICommandHandler<AddUserCommand>
 {
-    public async Task<int> Handle(AddUserCommand request, CancellationToken cancellationToken)
+    public async Task Handle(AddUserCommand request, CancellationToken cancellationToken)
     {
-        if (await userRepository
-            .AsQueryable()
-            .AnyAsync(x => x.Status != RecordStatusEnum.Deleted.ToInt()
-                && x.Email.Trim().ToUpper() == request.Email.Trim().ToUpper(),
-                cancellationToken))
-            throw new InvalidOperationException("User already exists.");
+        await unitOfWork.BeginTransactionAsync(cancellationToken);
 
-        var hashPassword = HashPassword(request.Password);
-
-        var user = new User
+        try
         {
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            Email = request.Email,
-            PhoneNumber = request.PhoneNumber,
-            PasswordHash = hashPassword,
-            CreatedAt = Utility.GetCurrentDateTimeOffset(),
-            CreatedById = null,
-            Status = (int)RecordStatusEnum.Active,
-        };
+            if (await userRepository
+                .AsQueryable()
+                .AnyAsync(x => x.Status != RecordStatusEnum.Deleted.ToInt()
+                    && x.Email.Trim().ToUpper() == request.Email.Trim().ToUpper(),
+                    cancellationToken))
+                throw new InvalidOperationException("User already exists.");
 
-        await userRepository.AddAsync(user);
-        await unitOfWork.SaveChangesAsync(cancellationToken);
+            var hashPassword = HashPassword(request.Password);
 
-        return user.Id;
+            var user = new User
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Email = request.Email,
+                PhoneNumber = request.PhoneNumber,
+                PasswordHash = hashPassword,
+                CreatedAt = Utility.GetCurrentDateTimeOffset(),
+                CreatedById = null,
+                Status = (int)RecordStatusEnum.Active,
+                UserRoles = [.. request.Roles.Select(x => new Core.Entities.UserRole
+                {
+                    RoleId = x,
+                    CreatedAt = Utility.GetCurrentDateTimeOffset(),
+                    CreatedById = null,
+                    Status = (int)RecordStatusEnum.Active
+                })]
+            };
+
+            await userRepository.AddAsync(user);
+
+            await unitOfWork.CommitTransactionAsync(cancellationToken);
+        }
+        catch(Exception ex)
+        {
+            await unitOfWork.RollbackTransactionAsync(cancellationToken);
+            throw new Exception(ex.Message);
+        }
     }
 
     private static string HashPassword(string password)

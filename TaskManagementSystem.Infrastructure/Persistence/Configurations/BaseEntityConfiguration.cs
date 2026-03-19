@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace TaskManagementSystem.Infrastructure.Persistence.Configurations;
+﻿namespace TaskManagementSystem.Infrastructure.Persistence.Configurations;
 
 public abstract class BaseEntityConfiguration<T>: IEntityTypeConfiguration<T> where T: BaseEntity
 {

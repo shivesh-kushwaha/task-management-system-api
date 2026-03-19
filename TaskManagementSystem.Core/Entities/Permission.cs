@@ -1,6 +1,6 @@
 ﻿namespace TaskManagementSystem.Core.Entities;
 
-public class Permission: BaseEntity
+public sealed class Permission: BaseEntity
 {
     public string Name { get; set; } = null!;
     public string Code { get; set; } = null!;

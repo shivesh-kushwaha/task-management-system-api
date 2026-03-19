@@ -1,6 +1,6 @@
 ﻿namespace TaskManagementSystem.Core.Entities;
 
-public class UserRole: BaseEntity
+public sealed class UserRole: BaseEntity
 {
     public int UserId { get; set; }
     public int RoleId { get; set; }

@@ -10,7 +10,7 @@ namespace TaskManagementSystem.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class AuthController(IMapper mapper, IMediator mediator) : ControllerBase
+public sealed class AuthController(IMapper mapper, IMediator mediator) : ControllerBase
 {
     [HttpPost("register")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -20,8 +20,8 @@ public class AuthController(IMapper mapper, IMediator mediator) : ControllerBase
         try
         {
             var command = mapper.Map<AddUserCommand>(request);
-            var response = await mediator.Send(command);
-            return Ok(response);
+            await mediator.Send(command);
+            return Ok();
         }
         catch (Exception ex)
         {

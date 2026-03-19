@@ -1,6 +1,6 @@
 ﻿namespace TaskManagementSystem.Infrastructure.Persistence.Configurations;
 
-public class UserRoleConfiguration: BaseEntityConfiguration<UserRole>
+public sealed class UserRoleConfiguration: BaseEntityConfiguration<UserRole>
 {
     public override void Configure(EntityTypeBuilder<UserRole> builder)
     {

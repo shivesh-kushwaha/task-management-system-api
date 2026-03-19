@@ -1,6 +1,6 @@
 ﻿namespace TaskManagementSystem.Infrastructure.Persistence.Configurations;
 
-public class RolePermissionConfiguration : BaseEntityConfiguration<RolePermission>
+public sealed class RolePermissionConfiguration : BaseEntityConfiguration<RolePermission>
 {
     public override void Configure(EntityTypeBuilder<RolePermission> builder)
     {

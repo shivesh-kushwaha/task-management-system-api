@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using TaskManagementSystem.Core.Abstractions;
-using TaskManagementSystem.Infrastructure.Persistence.Context;
 
 namespace TaskManagementSystem.Infrastructure.Persistence;
 
@@ -15,22 +14,22 @@ public sealed class UnitOfWork
         _dbContext = applicationDbContext;
     }
 
-    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {
         return await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task BeginTransactionAsync()
-        => _dbContextTransaction ??= await _dbContext.Database.BeginTransactionAsync();
+    public async Task BeginTransactionAsync(CancellationToken cancellationToken)
+        => _dbContextTransaction ??= await _dbContext.Database.BeginTransactionAsync(cancellationToken);
 
-    public async Task<int> CommitTransactionAsync()
+    public async Task<int> CommitTransactionAsync(CancellationToken cancellationToken)
     {
         try
         {
-            var tracks = await _dbContext.SaveChangesAsync();
+            var tracks = await _dbContext.SaveChangesAsync(cancellationToken);
             if (_dbContextTransaction != null)
             {
-                await _dbContextTransaction.CommitAsync();
+                await _dbContextTransaction.CommitAsync(cancellationToken);
                 return tracks;
             }
             else
@@ -38,16 +37,16 @@ public sealed class UnitOfWork
                 return 0;
             }
         }
-        catch
+        catch(Exception ex)
         {
-            await RollbackTransactionAsync();
+            await RollbackTransactionAsync(cancellationToken);
             return 0;
         }
     }
 
-    public async Task RollbackTransactionAsync()
+    public async Task RollbackTransactionAsync(CancellationToken cancellationToken)
     {
         if (_dbContextTransaction != null)
-            await _dbContextTransaction.RollbackAsync();
+            await _dbContextTransaction.RollbackAsync(cancellationToken);
     }
 }

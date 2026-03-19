@@ -1,5 +1,7 @@
-﻿namespace TaskManagementSystem.Core.Abstractions.Repositories;
+﻿using TaskManagementSystem.Core.Entities;
 
-public interface IRoleRepository
+namespace TaskManagementSystem.Core.Abstractions.Repositories;
+
+public interface IRoleRepository: IRepository<Role>
 {
 }

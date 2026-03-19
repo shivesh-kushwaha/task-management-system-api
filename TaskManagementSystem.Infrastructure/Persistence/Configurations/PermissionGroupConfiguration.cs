@@ -1,6 +1,6 @@
 ﻿namespace TaskManagementSystem.Infrastructure.Persistence.Configurations;
 
-public class PermissionGroupConfiguration: BaseEntityConfiguration<PermissionGroup>
+public sealed class PermissionGroupConfiguration: BaseEntityConfiguration<PermissionGroup>
 {
     public override void Configure(EntityTypeBuilder<PermissionGroup> builder)
     {
