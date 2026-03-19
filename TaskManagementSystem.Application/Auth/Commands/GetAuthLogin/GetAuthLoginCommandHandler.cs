@@ -1,6 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using TaskManagementSystem.Application.Auth.Dtos;
 using TaskManagementSystem.Core;
@@ -16,7 +17,7 @@ internal sealed class GetAuthLoginCommandHandler(IUserRepository userRepository)
         var user = await userRepository.GetUserByEmailAsync(request.Email)
             ?? throw new InvalidOperationException("User doesn't exist.");
 
-        if (!Core.Helpers.Utility.VerifyPassword(request.Password, user.PasswordHash))
+        if (!VerifyPassword(request.Password, user.PasswordHash))
             throw new InvalidOperationException("Invalid email or password.");
 
         var accessToken = GenerateAccessToken(user);
@@ -51,5 +52,13 @@ internal sealed class GetAuthLoginCommandHandler(IUserRepository userRepository)
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    private static bool VerifyPassword(string password, string passwordHash)
+    {
+        using var sha256 = SHA256.Create();
+        var hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+        var computeHash = Convert.ToBase64String(hashBytes);
+        return computeHash == passwordHash;
     }
 }

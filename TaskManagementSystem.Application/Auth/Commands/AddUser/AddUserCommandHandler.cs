@@ -1,4 +1,6 @@
-﻿using TaskManagementSystem.Core.Entities;
+﻿using System.Security.Cryptography;
+using System.Text;
+using TaskManagementSystem.Core.Entities;
 
 namespace TaskManagementSystem.Application.Auth.Commands.AddUser;
 
@@ -14,7 +16,7 @@ internal sealed class AddUserCommandHandler(IUserRepository userRepository,
                 cancellationToken))
             throw new InvalidOperationException("User already exists.");
 
-        var hashPassword = Utility.HashPassword(request.Password);
+        var hashPassword = HashPassword(request.Password);
 
         var user = new User
         {
@@ -32,5 +34,12 @@ internal sealed class AddUserCommandHandler(IUserRepository userRepository,
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return user.Id;
+    }
+
+    private static string HashPassword(string password)
+    {
+        using var sha256 = SHA256.Create();
+        var hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+        return Convert.ToBase64String(hashBytes);
     }
 }
