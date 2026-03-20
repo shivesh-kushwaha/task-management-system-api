@@ -1,5 +1,5 @@
-﻿using TaskManagementSystem.Application.Auth.Commands.AddUser;
-using TaskManagementSystem.Application.Auth.Dtos;
+﻿using TaskManagementSystem.Application.Commands.User.AddUser;
+using TaskManagementSystem.Application.Commands.User.Dtos;
 
 namespace TaskManagementSystem.Application.Mappings;
 

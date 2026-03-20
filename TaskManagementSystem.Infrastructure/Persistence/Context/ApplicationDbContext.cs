@@ -1,4 +1,6 @@
-﻿namespace TaskManagementSystem.Infrastructure.Persistence.Context;
+﻿using TaskManagementSystem.Core.Entities;
+
+namespace TaskManagementSystem.Infrastructure.Persistence.Context;
 
 public class ApplicationDbContext: DbContext
 {
@@ -10,7 +12,7 @@ public class ApplicationDbContext: DbContext
     public DbSet<RolePermission> RolePermissions => Set<RolePermission>();
     public DbSet<User> Users => Set<User>();
     public DbSet<UserRole> UserRoles => Set<UserRole>();
-    public DbSet<RefreshToken> RefreshToken => Set<RefreshToken>();
+    public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

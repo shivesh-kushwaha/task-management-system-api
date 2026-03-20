@@ -1,4 +1,4 @@
-﻿namespace TaskManagementSystem.Application.Auth.Commands.AddUser;
+﻿namespace TaskManagementSystem.Application.Commands.User.AddUser;
 
 public class AddUserCommand: ICommand
 {

@@ -1,4 +1,5 @@
 ﻿using TaskManagementSystem.Core.Abstractions.Repositories;
+using TaskManagementSystem.Core.Entities;
 using TaskManagementSystem.Core.Enums;
 
 namespace TaskManagementSystem.Infrastructure.Persistence.Repositories;

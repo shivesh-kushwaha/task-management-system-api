@@ -1,5 +1,5 @@
-﻿using TaskManagementSystem.Application.Role.Commands.AddRole;
-using TaskManagementSystem.Application.Role.Commands.Dtos;
+﻿using TaskManagementSystem.Application.Commands.Role.AddRole;
+using TaskManagementSystem.Application.Commands.Role.Dtos;
 
 namespace TaskManagementSystem.Application.Mappings;
 

@@ -10,7 +10,10 @@ public static class ApplicationBuilderExtensions
         AppSettings.Jwt.Issuer = builder.Configuration["Jwt:Issuer"] ?? string.Empty;
         AppSettings.Jwt.Audience = builder.Configuration["Jwt:Audience"] ?? string.Empty;
         
-        var expiryString = builder.Configuration["Jwt:ExpiryMinutes"];
-        AppSettings.Jwt.ExpiryMinutes = expiryString != null && int.TryParse(expiryString, out var minutes) ? minutes : 15;
+        var expiryMinutesString = builder.Configuration["Jwt:ExpiryMinutes"];
+        AppSettings.Jwt.ExpiryMinutes = expiryMinutesString != null && int.TryParse(expiryMinutesString, out var minutes) ? minutes : 15;
+
+        var expiryDaysString = builder.Configuration["Jwt:ExpiryMinutes"]; 
+        AppSettings.Jwt.ExpiryDays = expiryDaysString != null && int.TryParse(expiryDaysString, out var days) ? days : 15;
     }
 }

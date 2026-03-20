@@ -2,28 +2,28 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TaskManagementSystem.Application.Commands.Role.AddRole;
-using TaskManagementSystem.Application.Commands.Role.Dtos;
+using TaskManagementSystem.Application.Commands.User.AddUser;
+using TaskManagementSystem.Application.Commands.User.Dtos;
 
 namespace TaskManagementSystem.Api.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("[controller]")]
-public sealed class RoleController(IMapper mapper, IMediator mediator): ControllerBase
+public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
 {
+    [AllowAnonymous]
+    [HttpPost("register")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    [HttpPost]
-    public async Task<IActionResult> AddRole([FromBody] AddRoleDto request)
+    public async Task<IActionResult> Register([FromBody] AddUserDto request)
     {
         try
         {
-            var command = mapper.Map<AddRoleCommand>(request);
+            var command = mapper.Map<AddUserCommand>(request);
             await mediator.Send(command);
             return Ok();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             return BadRequest(ex.Message);
         }

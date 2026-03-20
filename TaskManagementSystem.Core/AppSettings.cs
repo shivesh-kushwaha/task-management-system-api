@@ -11,5 +11,6 @@ public static class AppSettings
         public static string Issuer { get; set; } = null!;
         public static string Audience { get; set; } = null!;
         public static int ExpiryMinutes { get; set; }
+        public static int ExpiryDays { get; set; }
     }
 }

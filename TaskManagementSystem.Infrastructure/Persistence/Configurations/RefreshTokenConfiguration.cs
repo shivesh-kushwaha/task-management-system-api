@@ -1,4 +1,6 @@
-﻿namespace TaskManagementSystem.Infrastructure.Persistence.Configurations;
+﻿using TaskManagementSystem.Core.Entities;
+
+namespace TaskManagementSystem.Infrastructure.Persistence.Configurations;
 
 internal sealed class RefreshTokenConfiguration: IEntityTypeConfiguration<RefreshToken>
 {
@@ -18,7 +20,13 @@ internal sealed class RefreshTokenConfiguration: IEntityTypeConfiguration<Refres
         builder.Property(x => x.ExpiresAt)
             .IsRequired();
 
-        builder.Property(x => x.IsRevoked);
+        builder.Property(x => x.CreatedAt)
+            .IsRequired();
+
+        builder.Property(x => x.Status)
+            .IsRequired();
+
+        builder.Property(x => x.DeletedAt);
 
         builder.HasOne(x => x.User)
             .WithMany(x => x.RefreshTokens)

@@ -1,4 +1,4 @@
-﻿namespace TaskManagementSystem.Application.Role.Commands.AddRole;
+﻿namespace TaskManagementSystem.Application.Commands.Role.AddRole;
 
 public class AddRoleCommand: ICommand
 {

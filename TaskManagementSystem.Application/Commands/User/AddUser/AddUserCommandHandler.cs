@@ -2,10 +2,10 @@
 using System.Text;
 using TaskManagementSystem.Core.Entities;
 
-namespace TaskManagementSystem.Application.Auth.Commands.AddUser;
+namespace TaskManagementSystem.Application.Commands.User.AddUser;
 
 internal sealed class AddUserCommandHandler(IUserRepository userRepository,
-    IUnitOfWork unitOfWork): ICommandHandler<AddUserCommand>
+    IUnitOfWork unitOfWork) : ICommandHandler<AddUserCommand>
 {
     public async Task Handle(AddUserCommand request, CancellationToken cancellationToken)
     {
@@ -22,7 +22,7 @@ internal sealed class AddUserCommandHandler(IUserRepository userRepository,
 
             var hashPassword = HashPassword(request.Password);
 
-            var user = new User
+            var user = new Core.Entities.User
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
@@ -45,7 +45,7 @@ internal sealed class AddUserCommandHandler(IUserRepository userRepository,
 
             await unitOfWork.CommitTransactionAsync(cancellationToken);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             await unitOfWork.RollbackTransactionAsync(cancellationToken);
             throw new Exception(ex.Message);

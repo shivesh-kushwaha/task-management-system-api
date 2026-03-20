@@ -1,4 +1,4 @@
-﻿namespace TaskManagementSystem.Application.Role.Commands.Dtos;
+﻿namespace TaskManagementSystem.Application.Commands.Role.Dtos;
 
 public sealed record AddRoleDto
 {

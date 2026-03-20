@@ -1,4 +1,6 @@
-﻿namespace TaskManagementSystem.Infrastructure.Persistence.Configurations;
+﻿using TaskManagementSystem.Core.Entities;
+
+namespace TaskManagementSystem.Infrastructure.Persistence.Configurations;
 
 public sealed class UserConfiguration: BaseEntityConfiguration<User>
 {

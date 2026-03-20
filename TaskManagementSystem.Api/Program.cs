@@ -1,7 +1,5 @@
-using AutoMapper;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TaskManagementSystem.Api;
@@ -13,7 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.LoadAppSettings();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(new AuthorizeFilter());
+});
+
 builder.Services.AddOpenApi();
 
 builder.Services.AddApplication();

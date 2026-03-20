@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using TaskManagementSystem.Application.Abstractions.Services;
+using TaskManagementSystem.Application.Services;
 namespace TaskManagementSystem.Application;
 
 public static class DependencyInjection
@@ -12,6 +14,9 @@ public static class DependencyInjection
         // Mapping configurations
         services.AddAutoMapper(cfg => cfg.AddProfile<Mappings.AuthMappingProfile>());
         services.AddAutoMapper(cfg => cfg.AddProfile<Mappings.RoleMappingProfile>());
+
+        // Services
+        services.AddScoped<IAuthService, AuthService>();
 
         return services;
     }

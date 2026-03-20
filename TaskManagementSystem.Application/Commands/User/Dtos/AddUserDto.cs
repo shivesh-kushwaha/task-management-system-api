@@ -1,4 +1,4 @@
-﻿namespace TaskManagementSystem.Application.Auth.Dtos;
+﻿namespace TaskManagementSystem.Application.Commands.User.Dtos;
 
 public sealed record AddUserDto
 {

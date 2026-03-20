@@ -1,4 +1,4 @@
-﻿namespace TaskManagementSystem.Application.Role.Commands.AddRole;
+﻿namespace TaskManagementSystem.Application.Commands.Role.AddRole;
 
 internal sealed class AddRoleCommandHandler(IRoleRepository roleRepository,
     IUnitOfWork unitOfWork): ICommandHandler<AddRoleCommand>
