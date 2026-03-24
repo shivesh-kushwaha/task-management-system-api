@@ -1,60 +1,85 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Text;
 using TaskManagementSystem.Api;
+using TaskManagementSystem.Api.Extensions;
+using TaskManagementSystem.Api.Middlewares;
 using TaskManagementSystem.Application;
 using TaskManagementSystem.Core;
 using TaskManagementSystem.Infrastructure;
 
-var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+     .CreateBootstrapLogger();
 
-builder.LoadAppSettings();
-
-builder.Services.AddControllers(options =>
+try
 {
-    options.Filters.Add(new AuthorizeFilter());
-});
+    Log.Information("Starting Task Management System....");
 
-builder.Services.AddOpenApi();
+    var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddApplication();
-builder.Services.AddInfrastructure(builder.Configuration);
+    builder.AddSerilogLogging();
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
+    builder.LoadAppSettings();
+
+    builder.Services.AddControllers(options =>
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = AppSettings.Jwt.Issuer,
-        ValidAudience = AppSettings.Jwt.Audience,
-        IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(AppSettings.Jwt.Key))
-    };
-});
+        options.Filters.Add(new AuthorizeFilter());
+    });
 
-builder.Services.AddAuthorization();
+    builder.Services.AddOpenApi();
 
-var app = builder.Build();
+    builder.Services.AddApplication();
+    builder.Services.AddInfrastructure(builder.Configuration);
 
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
+    builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = AppSettings.Jwt.Issuer,
+            ValidAudience = AppSettings.Jwt.Audience,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(AppSettings.Jwt.Key))
+        };
+    });
+
+    builder.Services.AddAuthorization();
+
+    var app = builder.Build();
+
+    if (app.Environment.IsDevelopment())
+    {
+        app.MapOpenApi();
+    }
+
+    app.UseMiddleware<ExceptionHandlingMiddleware>();
+    app.UseSerilogRequestLogging();
+
+    app.UseHttpsRedirection();
+
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    app.Run();
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+catch(Exception ex)
+{
+    Log.Fatal(ex, "Application terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}

@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using TaskManagementSystem.Application.Behaviors;
 using TaskManagementSystem.Application.Services;
 namespace TaskManagementSystem.Application;
 
@@ -7,8 +9,12 @@ public static class DependencyInjection
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         var assembly = typeof(DependencyInjection).Assembly;
-        services.AddMediatR(cfg =>
-            cfg.RegisterServicesFromAssembly(assembly));
+
+        // Mediator
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
+
+        // Logging
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
 
         // Mapping configurations
         services.AddAutoMapper(cfg => cfg.AddProfile<Mappings.AuthMappingProfile>());

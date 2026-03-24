@@ -5,7 +5,9 @@ namespace TaskManagementSystem.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public sealed class TeamController(IMapper mapper, IMediator mediator): ControllerBase
+    public sealed class TeamController(IMapper mapper,
+        IMediator mediator,
+        ILogger<TeamController> logger) : ControllerBase
     {
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -18,8 +20,9 @@ namespace TaskManagementSystem.Api.Controllers
                 await mediator.Send(command);
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                logger.LogError(ex, "Add Team Controller.");
                 return BadRequest(ex.Message);
             }
         }
