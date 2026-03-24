@@ -1,9 +1,11 @@
-﻿namespace TaskManagementSystem.Core.Entities;
+﻿using TaskManagementSystem.Core.Enums;
+
+namespace TaskManagementSystem.Core.Entities;
 
 public abstract class BaseEntity
 {
     public int Id { get; set; }
-    public int Status { get; set; }
+    public RecordStatusEnum Status { get; set; }
     public DateTimeOffset CreatedAt { get; set; }
     public int? CreatedById { get; set; }
     public DateTimeOffset? UpdatedAt { get; set; }

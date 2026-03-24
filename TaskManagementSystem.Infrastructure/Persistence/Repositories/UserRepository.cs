@@ -11,7 +11,7 @@ public sealed class UserRepository(ApplicationDbContext dbContext)
     {
         return dbContext.Users.AsNoTracking()
             .Include(x => x.UserRoles
-                .Where(ur => ur.Status != (int)RecordStatusEnum.Deleted))
+                .Where(ur => ur.Status != RecordStatusEnum.Deleted))
             .AsNoTracking()
             .Where(x => x.Email.Trim().ToUpper() == email.Trim().ToUpper())
             .FirstOrDefaultAsync();

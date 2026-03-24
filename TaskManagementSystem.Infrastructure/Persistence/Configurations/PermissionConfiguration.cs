@@ -8,6 +8,8 @@ public sealed class PermissionConfiguration: BaseEntityConfiguration<Permission>
     {
         base.Configure(builder);
 
+        builder.ToTable(TableNames.Identity.Permissions);
+
         builder.Property(x => x.Name)
             .HasMaxLength(50)
             .IsRequired();

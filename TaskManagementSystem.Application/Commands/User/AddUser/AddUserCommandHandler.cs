@@ -15,7 +15,7 @@ internal sealed class AddUserCommandHandler(IUserRepository userRepository,
         {
             if (await userRepository
                 .AsQueryable()
-                .AnyAsync(x => x.Status != RecordStatusEnum.Deleted.ToInt()
+                .AnyAsync(x => x.Status != RecordStatusEnum.Deleted
                     && x.Email.Trim().ToUpper() == request.Email.Trim().ToUpper(),
                     cancellationToken))
                 throw new InvalidOperationException("User already exists.");
@@ -31,13 +31,13 @@ internal sealed class AddUserCommandHandler(IUserRepository userRepository,
                 PasswordHash = hashPassword,
                 CreatedAt = Utility.GetCurrentDateTimeOffset(),
                 CreatedById = null,
-                Status = (int)RecordStatusEnum.Active,
+                Status = RecordStatusEnum.Active,
                 UserRoles = [.. request.Roles.Select(x => new Core.Entities.UserRole
                 {
                     RoleId = x,
                     CreatedAt = Utility.GetCurrentDateTimeOffset(),
                     CreatedById = null,
-                    Status = (int)RecordStatusEnum.Active
+                    Status = RecordStatusEnum.Active
                 })]
             };
 

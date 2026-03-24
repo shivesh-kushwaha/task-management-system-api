@@ -11,7 +11,7 @@ internal sealed class AddRoleCommandHandler(IRoleRepository roleRepository,
             Description = request.Description,
             CreatedAt = Utility.GetCurrentDateTimeOffset(),
             CreatedById = null,
-            Status = (int)RecordStatusEnum.Active
+            Status = RecordStatusEnum.Active
         };
 
         await roleRepository.AddAsync(entity);

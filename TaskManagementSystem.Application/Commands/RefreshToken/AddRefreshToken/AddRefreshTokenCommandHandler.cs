@@ -21,7 +21,7 @@ internal sealed class AddRefreshTokenCommandHandler(
         var existingUser = await userRepository
             .AsQueryable()
             .AsNoTracking()
-            .Where(x => x.Status != (int)RecordStatusEnum.Deleted
+            .Where(x => x.Status != RecordStatusEnum.Deleted
                 && x.Id == existingRefreshToken.UserId)
             .SingleOrDefaultAsync(cancellationToken)
             ?? throw new InvalidOperationException($"User not found by id {existingRefreshToken.Id}.");
