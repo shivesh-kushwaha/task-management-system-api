@@ -17,7 +17,7 @@ internal sealed class AddTeamCommandHandler(
             {
                 Name = request.Name,
                 Description = request.Description,
-                CreatedById = null,
+                CreatedById = request.UserId,
                 CreatedAt = Utility.GetCurrentDateTimeOffset(),
                 Status = RecordStatusEnum.Active,
                 Members = [.. request.Members.Select(id => new Core.Entities.TeamMember

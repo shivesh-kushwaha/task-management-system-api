@@ -30,7 +30,7 @@ try
     });
 
     builder.Services.AddOpenApi();
-
+    builder.Services.AddHttpContextAccessor();
     builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
 

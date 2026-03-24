@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using TaskManagementSystem.Application.Behaviors;
 using TaskManagementSystem.Application.Services;
+
 namespace TaskManagementSystem.Application;
 
 public static class DependencyInjection
@@ -13,7 +14,8 @@ public static class DependencyInjection
         // Mediator
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
 
-        // Logging
+        // Pipelines
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(UserContextPipelineBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
 
         // Mapping configurations
