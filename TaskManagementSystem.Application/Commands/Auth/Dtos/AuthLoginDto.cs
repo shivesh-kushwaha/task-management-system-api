@@ -1,6 +1,6 @@
-﻿namespace TaskManagementSystem.Api.Models.Auth;
+﻿namespace TaskManagementSystem.Application.Commands.Auth.Dtos;
 
-public sealed record LoginRequestModel
+public sealed record AuthLoginDto
 {
     public string Email { get; set; } = null!;
     public string Password { get; set; } = null!;

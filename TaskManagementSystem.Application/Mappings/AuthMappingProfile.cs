@@ -1,5 +1,5 @@
-﻿using TaskManagementSystem.Application.Commands.User.AddUser;
-using TaskManagementSystem.Application.Commands.User.Dtos;
+﻿using TaskManagementSystem.Application.Commands.Auth.AuthLogin;
+using TaskManagementSystem.Application.Commands.Auth.Dtos;
 
 namespace TaskManagementSystem.Application.Mappings;
 
@@ -7,6 +7,6 @@ internal sealed class AuthMappingProfile: Profile
 {
     public AuthMappingProfile()
     {
-        CreateMap<AddUserDto, AddUserCommand>();
+        CreateMap<AuthLoginDto, AuthLoginCommand>();
     }
 }
