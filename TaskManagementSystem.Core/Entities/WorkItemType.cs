@@ -10,5 +10,5 @@ public sealed class WorkItemType
     public int CreatedById { get; set; }
     public RecordStatusEnum Status { get; set; }
     public int? DeletedById { get; set; }
-    public DateTimeOffset? DeletedAt { get; set; }           // ✅ Must be nullable — not always deleted
+    public DateTimeOffset? DeletedAt { get; set; }
 }

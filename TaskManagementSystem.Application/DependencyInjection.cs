@@ -24,6 +24,7 @@ public static class DependencyInjection
         services.AddAutoMapper(cfg => cfg.AddProfile<Mappings.UserMappingProfile>());
         services.AddAutoMapper(cfg => cfg.AddProfile<Mappings.ProjectMappingProfile>());
         services.AddAutoMapper(cfg => cfg.AddProfile<Mappings.TeamMappingProfile>());
+        services.AddAutoMapper(cfg => cfg.AddProfile<Mappings.WorkItemMappingProfile>());
 
         // Services
         services.AddScoped<IAuthService, AuthService>();
