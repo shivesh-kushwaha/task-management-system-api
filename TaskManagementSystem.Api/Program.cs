@@ -24,6 +24,14 @@ try
 
     builder.LoadAppSettings();
 
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowValidOrigins",
+            b => b.WithOrigins(AppSettings.Cors.ValidOrigins)
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials());
+    });
     builder.Services.AddControllers(options =>
     {
         options.Filters.Add(new AuthorizeFilter());
@@ -68,6 +76,8 @@ try
 
     app.UseHttpsRedirection();
 
+    app.UseCors("AllowValidOrigins");
+
     app.UseAuthentication();
     app.UseAuthorization();
 
@@ -75,7 +85,7 @@ try
 
     app.Run();
 }
-catch(Exception ex)
+catch (Exception ex)
 {
     Log.Fatal(ex, "Application terminated unexpectedly");
 }

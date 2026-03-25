@@ -26,6 +26,7 @@ internal sealed class AuthService(
         {
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
             new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.Name, user.FirstName.Trim() + " " + user.LastName.Trim()),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim("RoleIds", roleIds)
         };
@@ -56,7 +57,7 @@ internal sealed class AuthService(
         var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64))
             .Replace("+", "-")
             .Replace("/", "_")
-            .Replace("=", ""); 
+            .Replace("=", "");
 
         var expiresAt = Core.Helpers.Utility.GetCurrentDateTimeOffset().AddDays(AppSettings.Jwt.ExpiryDays);
 

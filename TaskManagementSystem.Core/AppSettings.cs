@@ -2,8 +2,10 @@
 
 public static class AppSettings
 {
-    public static string UserId { get; set; } = null!;
-    public static string Password { get; set; } = null!;
+    public static class Cors
+    {
+        public static string[] ValidOrigins { get; set; } = [];
+    }
 
     public static class Jwt
     {
