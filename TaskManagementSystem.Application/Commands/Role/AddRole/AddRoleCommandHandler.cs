@@ -10,7 +10,7 @@ internal sealed class AddRoleCommandHandler(IRoleRepository roleRepository,
             Name = request.Name,
             Description = request.Description,
             CreatedAt = Utility.GetCurrentDateTimeOffset(),
-            CreatedById = null,
+            CreatedById = request.UserId,
             Status = RecordStatusEnum.Active
         };
 

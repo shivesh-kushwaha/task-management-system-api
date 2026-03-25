@@ -30,7 +30,7 @@ internal sealed class AddUserCommandHandler(IUserRepository userRepository,
                 PhoneNumber = request.PhoneNumber,
                 PasswordHash = hashPassword,
                 CreatedAt = Utility.GetCurrentDateTimeOffset(),
-                CreatedById = null,
+                CreatedById = request.UserId,
                 Status = RecordStatusEnum.Active,
                 UserRoles = [.. request.Roles.Select(x => new Core.Entities.UserRole
                 {

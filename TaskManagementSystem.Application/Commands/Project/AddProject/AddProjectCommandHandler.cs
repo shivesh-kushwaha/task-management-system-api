@@ -13,7 +13,7 @@ internal sealed class AddProjectCommandHandler(
             Description = request.Description,
             Type = request.Type,
             TeamId = request.TeamId,
-            CreatedById = null,
+            CreatedById = request.UserId,
             CreatedAt = Utility.GetCurrentDateTimeOffset(),
             Status = RecordStatusEnum.Active,
 

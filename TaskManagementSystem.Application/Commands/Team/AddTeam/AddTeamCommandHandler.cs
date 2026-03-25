@@ -11,6 +11,14 @@ internal sealed class AddTeamCommandHandler(
         {
             throw new InvalidOperationException("Please select members.");
         }
+        else if(await teamRepository
+            .AsQueryable()
+            .AnyAsync(x => x.Status != RecordStatusEnum.Deleted
+                && x.Name.Trim().ToUpper().Equals(request.Name.Trim().ToUpper()),
+             cancellationToken))
+        {
+            throw new InvalidOperationException($"Team with name '{request.Name}' already exists.");
+        }
         else
         {
             var team = new Core.Entities.Team
