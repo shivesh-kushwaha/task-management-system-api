@@ -1,6 +1,5 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using TaskManagementSystem.Application.Common.Dtos;
 namespace TaskManagementSystem.Application.Commands.Auth.AuthLogin;
 
 internal sealed class AuthLoginCommandHandler(

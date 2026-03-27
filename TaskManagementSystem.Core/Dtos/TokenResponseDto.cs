@@ -1,4 +1,4 @@
-﻿namespace TaskManagementSystem.Application.Common.Dtos;
+﻿namespace TaskManagementSystem.Core.Dtos;
 
 public sealed record TokenResponseDto
 {

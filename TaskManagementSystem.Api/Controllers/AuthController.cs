@@ -1,6 +1,6 @@
 ﻿using TaskManagementSystem.Application.Commands.Auth.AuthLogin;
 using TaskManagementSystem.Application.Commands.Auth.Dtos;
-using TaskManagementSystem.Application.Common.Dtos;
+using TaskManagementSystem.Core.Dtos;
 
 namespace TaskManagementSystem.Api.Controllers;
 

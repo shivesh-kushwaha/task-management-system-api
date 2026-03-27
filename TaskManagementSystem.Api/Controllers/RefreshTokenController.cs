@@ -1,8 +1,5 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using TaskManagementSystem.Application.Commands.RefreshToken.AddRefreshToken;
-using TaskManagementSystem.Application.Common.Dtos;
+﻿using TaskManagementSystem.Application.Commands.RefreshToken.AddRefreshToken;
+using TaskManagementSystem.Core.Dtos;
 
 namespace TaskManagementSystem.Api.Controllers;
 

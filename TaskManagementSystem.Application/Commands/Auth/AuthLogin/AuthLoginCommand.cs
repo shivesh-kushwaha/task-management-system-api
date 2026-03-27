@@ -1,6 +1,4 @@
-﻿using TaskManagementSystem.Application.Common.Dtos;
-
-namespace TaskManagementSystem.Application.Commands.Auth.AuthLogin;
+﻿namespace TaskManagementSystem.Application.Commands.Auth.AuthLogin;
 
 public class AuthLoginCommand: ICommand<TokenResponseDto>
 {
