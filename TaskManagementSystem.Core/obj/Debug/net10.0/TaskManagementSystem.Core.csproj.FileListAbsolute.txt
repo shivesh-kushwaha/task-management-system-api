@@ -1,0 +1,11 @@
+E:\Projects\Backend\TaskManagementSystem.Core\bin\Debug\net10.0\TaskManagementSystem.Core.deps.json
+E:\Projects\Backend\TaskManagementSystem.Core\bin\Debug\net10.0\TaskManagementSystem.Core.dll
+E:\Projects\Backend\TaskManagementSystem.Core\bin\Debug\net10.0\TaskManagementSystem.Core.pdb
+E:\Projects\Backend\TaskManagementSystem.Core\obj\Debug\net10.0\TaskManagementSystem.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projects\Backend\TaskManagementSystem.Core\obj\Debug\net10.0\TaskManagementSystem.Core.AssemblyInfoInputs.cache
+E:\Projects\Backend\TaskManagementSystem.Core\obj\Debug\net10.0\TaskManagementSystem.Core.AssemblyInfo.cs
+E:\Projects\Backend\TaskManagementSystem.Core\obj\Debug\net10.0\TaskManagementSystem.Core.csproj.CoreCompileInputs.cache
+E:\Projects\Backend\TaskManagementSystem.Core\obj\Debug\net10.0\TaskManagementSystem.Core.dll
+E:\Projects\Backend\TaskManagementSystem.Core\obj\Debug\net10.0\refint\TaskManagementSystem.Core.dll
+E:\Projects\Backend\TaskManagementSystem.Core\obj\Debug\net10.0\TaskManagementSystem.Core.pdb
+E:\Projects\Backend\TaskManagementSystem.Core\obj\Debug\net10.0\ref\TaskManagementSystem.Core.dll

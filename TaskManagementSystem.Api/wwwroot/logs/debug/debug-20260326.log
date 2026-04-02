@@ -1,0 +1,20 @@
+[2026-03-26 10:33:37.147 +05:30] [INF] [Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using 'C:\Users\Well\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2026-03-26 10:33:37.841 +05:30] [INF] [Microsoft.Hosting.Lifetime] Now listening on: https://localhost:7276
+[2026-03-26 10:33:37.847 +05:30] [INF] [Microsoft.Hosting.Lifetime] Now listening on: http://localhost:5177
+[2026-03-26 10:33:38.564 +05:30] [INF] [Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2026-03-26 10:33:38.588 +05:30] [INF] [Microsoft.Hosting.Lifetime] Hosting environment: Development
+[2026-03-26 10:33:38.609 +05:30] [INF] [Microsoft.Hosting.Lifetime] Content root path: E:\Projects\Backend\TaskManagementSystem.Api
+[2026-03-26 10:33:48.134 +05:30] [INF] [Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7276/ - null null
+[2026-03-26 10:33:49.228 +05:30] [INF] [Serilog.AspNetCore.RequestLoggingMiddleware] HTTP GET / responded 404 in 246.5260 ms
+[2026-03-26 10:33:49.256 +05:30] [INF] [Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7276/ - 404 null null 1154.1456ms
+[2026-03-26 10:33:49.350 +05:30] [INF] [Microsoft.AspNetCore.Hosting.Diagnostics] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7276/, Response status code: 404
+[2026-03-26 12:44:04.621 +05:30] [INF] [Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using 'C:\Users\Well\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2026-03-26 12:44:05.278 +05:30] [INF] [Microsoft.Hosting.Lifetime] Now listening on: https://localhost:7276
+[2026-03-26 12:44:05.281 +05:30] [INF] [Microsoft.Hosting.Lifetime] Now listening on: http://localhost:5177
+[2026-03-26 12:44:05.414 +05:30] [INF] [Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2026-03-26 12:44:05.418 +05:30] [INF] [Microsoft.Hosting.Lifetime] Hosting environment: Development
+[2026-03-26 12:44:05.420 +05:30] [INF] [Microsoft.Hosting.Lifetime] Content root path: E:\Projects\Backend\TaskManagementSystem.Api
+[2026-03-26 12:44:07.020 +05:30] [INF] [Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7276/ - null null
+[2026-03-26 12:44:11.316 +05:30] [INF] [Serilog.AspNetCore.RequestLoggingMiddleware] HTTP GET / responded 404 in 3941.5322 ms
+[2026-03-26 12:44:11.337 +05:30] [INF] [Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7276/ - 404 null null 4334.4443ms
+[2026-03-26 12:44:11.351 +05:30] [INF] [Microsoft.AspNetCore.Hosting.Diagnostics] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7276/, Response status code: 404
