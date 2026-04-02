@@ -1,5 +1,7 @@
 wwwroot\logs\debug\debug-20260325.log
 wwwroot\logs\debug\debug-20260326.log
 wwwroot\logs\debug\debug-20260327.log
+wwwroot\logs\debug\debug-20260401.log
+wwwroot\logs\debug\debug-20260402.log
 wwwroot\logs\errors\error-20260325.log
 wwwroot\logs\errors\error-20260327.log

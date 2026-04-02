@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "R/ftJ+cJJbc=",
+  "dgSpecHash": "t3OBk1SiXzM=",
   "success": true,
-  "projectFilePath": "E:\\Projects\\Backend\\TaskManagementSystem.Api\\TaskManagementSystem.Api.csproj",
+  "projectFilePath": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Api\\TaskManagementSystem.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Well\\.nuget\\packages\\automapper\\16.1.1\\automapper.16.1.1.nupkg.sha512",
     "C:\\Users\\Well\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",

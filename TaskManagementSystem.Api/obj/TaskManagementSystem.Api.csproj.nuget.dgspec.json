@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Projects\\Backend\\TaskManagementSystem.Api\\TaskManagementSystem.Api.csproj": {}
+    "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Api\\TaskManagementSystem.Api.csproj": {}
   },
   "projects": {
-    "E:\\Projects\\Backend\\TaskManagementSystem.Api\\TaskManagementSystem.Api.csproj": {
+    "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Api\\TaskManagementSystem.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\Backend\\TaskManagementSystem.Api\\TaskManagementSystem.Api.csproj",
+        "projectUniqueName": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Api\\TaskManagementSystem.Api.csproj",
         "projectName": "TaskManagementSystem.Api",
-        "projectPath": "E:\\Projects\\Backend\\TaskManagementSystem.Api\\TaskManagementSystem.Api.csproj",
+        "projectPath": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Api\\TaskManagementSystem.Api.csproj",
         "packagesPath": "C:\\Users\\Well\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\Backend\\TaskManagementSystem.Api\\obj\\",
+        "outputPath": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "E:\\Projects\\Backend\\TaskManagementSystem.Application\\TaskManagementSystem.Application.csproj": {
-                "projectPath": "E:\\Projects\\Backend\\TaskManagementSystem.Application\\TaskManagementSystem.Application.csproj"
+              "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Application\\TaskManagementSystem.Application.csproj": {
+                "projectPath": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Application\\TaskManagementSystem.Application.csproj"
               }
             }
           }
@@ -520,14 +520,14 @@
         }
       }
     },
-    "E:\\Projects\\Backend\\TaskManagementSystem.Application\\TaskManagementSystem.Application.csproj": {
+    "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Application\\TaskManagementSystem.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\Backend\\TaskManagementSystem.Application\\TaskManagementSystem.Application.csproj",
+        "projectUniqueName": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Application\\TaskManagementSystem.Application.csproj",
         "projectName": "TaskManagementSystem.Application",
-        "projectPath": "E:\\Projects\\Backend\\TaskManagementSystem.Application\\TaskManagementSystem.Application.csproj",
+        "projectPath": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Application\\TaskManagementSystem.Application.csproj",
         "packagesPath": "C:\\Users\\Well\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\Backend\\TaskManagementSystem.Application\\obj\\",
+        "outputPath": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -548,8 +548,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "E:\\Projects\\Backend\\TaskManagementSystem.Infrastructure\\TaskManagementSystem.Infrastructure.csproj": {
-                "projectPath": "E:\\Projects\\Backend\\TaskManagementSystem.Infrastructure\\TaskManagementSystem.Infrastructure.csproj"
+              "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Infrastructure\\TaskManagementSystem.Infrastructure.csproj": {
+                "projectPath": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Infrastructure\\TaskManagementSystem.Infrastructure.csproj"
               }
             }
           }
@@ -881,14 +881,14 @@
         }
       }
     },
-    "E:\\Projects\\Backend\\TaskManagementSystem.Core\\TaskManagementSystem.Core.csproj": {
+    "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Core\\TaskManagementSystem.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\Backend\\TaskManagementSystem.Core\\TaskManagementSystem.Core.csproj",
+        "projectUniqueName": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Core\\TaskManagementSystem.Core.csproj",
         "projectName": "TaskManagementSystem.Core",
-        "projectPath": "E:\\Projects\\Backend\\TaskManagementSystem.Core\\TaskManagementSystem.Core.csproj",
+        "projectPath": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Core\\TaskManagementSystem.Core.csproj",
         "packagesPath": "C:\\Users\\Well\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\Backend\\TaskManagementSystem.Core\\obj\\",
+        "outputPath": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1220,14 +1220,14 @@
         }
       }
     },
-    "E:\\Projects\\Backend\\TaskManagementSystem.Infrastructure\\TaskManagementSystem.Infrastructure.csproj": {
+    "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Infrastructure\\TaskManagementSystem.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\Backend\\TaskManagementSystem.Infrastructure\\TaskManagementSystem.Infrastructure.csproj",
+        "projectUniqueName": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Infrastructure\\TaskManagementSystem.Infrastructure.csproj",
         "projectName": "TaskManagementSystem.Infrastructure",
-        "projectPath": "E:\\Projects\\Backend\\TaskManagementSystem.Infrastructure\\TaskManagementSystem.Infrastructure.csproj",
+        "projectPath": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Infrastructure\\TaskManagementSystem.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Well\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\Backend\\TaskManagementSystem.Infrastructure\\obj\\",
+        "outputPath": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1248,8 +1248,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "E:\\Projects\\Backend\\TaskManagementSystem.Core\\TaskManagementSystem.Core.csproj": {
-                "projectPath": "E:\\Projects\\Backend\\TaskManagementSystem.Core\\TaskManagementSystem.Core.csproj"
+              "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Core\\TaskManagementSystem.Core.csproj": {
+                "projectPath": "E:\\Projects\\TaskManagementSystem\\task-management-system-api\\TaskManagementSystem.Core\\TaskManagementSystem.Core.csproj"
               }
             }
           }
