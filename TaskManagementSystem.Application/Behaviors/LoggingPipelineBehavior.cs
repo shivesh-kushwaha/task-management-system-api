@@ -25,7 +25,7 @@ public sealed class LoggingPipelineBehavior<TRequest, TResponse>(
         catch (Exception ex)
         {
             logger.LogError(ex, "Error handling {RequestName}", requestName);
-            throw;
+            throw new Exception(ex.Message);
         }
     }
 }

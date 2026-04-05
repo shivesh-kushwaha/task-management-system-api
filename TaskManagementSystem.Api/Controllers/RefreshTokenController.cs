@@ -13,14 +13,7 @@ public sealed class RefreshTokenController(IMediator mediator) : ControllerBase
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> AddRefreshToken([FromQuery] string token)
     {
-        try
-        {
-            var response = await mediator.Send(new AddRefreshTokenCommand { Token = token });
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var response = await mediator.Send(new AddRefreshTokenCommand { Token = token });
+        return Ok(response);
     }
 }

@@ -15,15 +15,8 @@ public sealed class AuthController(IMapper mapper, IMediator mediator) : Control
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Login([FromBody] AuthLoginDto request)
     {
-        try
-        {
-            var command = mapper.Map<AuthLoginCommand>(request);
-            var response = await mediator.Send(command);
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var command = mapper.Map<AuthLoginCommand>(request);
+        var response = await mediator.Send(command);
+        return Ok(response);
     }
 }

@@ -20,7 +20,7 @@ public sealed class ExceptionHandlingMiddleware(
 
             await context.Response.WriteAsJsonAsync(new
             {
-                Message = "An unexpected error occurred."
+                Message = ex.Message ?? "An unexpected error occurred."
             });
         }
     }

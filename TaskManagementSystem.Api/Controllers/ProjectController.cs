@@ -9,8 +9,7 @@ namespace TaskManagementSystem.Api.Controllers;
 [ApiController]
 [Route("[controller]")]
 public sealed class ProjectController(
-    ILogger<ProjectController> logger,
-    IMapper mapper, 
+    IMapper mapper,
     IMediator mediator) : ControllerBase
 {
     [HttpPost]
@@ -18,16 +17,9 @@ public sealed class ProjectController(
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> AddProject([FromBody] AddProjectDto request)
     {
-        try
-        {
-            var command = mapper.Map<AddProjectCommand>(request);
-            await mediator.Send(command);
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var command = mapper.Map<AddProjectCommand>(request);
+        await mediator.Send(command);
+        return Ok();
     }
 
     [HttpGet("paged-list")]
@@ -35,15 +27,7 @@ public sealed class ProjectController(
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetPagedList([FromQuery] PagedListRequestDto request)
     {
-        try
-        {
-            var query = mapper.Map<GetProjectPagedListQuery>(request);
-            return Ok(await mediator.Send(query));
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "Get project paged list.");
-            return BadRequest(ex.Message);
-        }
+        var query = mapper.Map<GetProjectPagedListQuery>(request);
+        return Ok(await mediator.Send(query));
     }
 }
