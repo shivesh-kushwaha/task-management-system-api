@@ -1,8 +1,10 @@
 ﻿using TaskManagementSystem.Application.Commands.Project.AddProject;
 using TaskManagementSystem.Application.Commands.Project.DeleteProject;
 using TaskManagementSystem.Application.Commands.Project.Dtos;
+using TaskManagementSystem.Application.Queries.Project.GetProjectById;
 using TaskManagementSystem.Application.Queries.Project.GetProjectPagedList;
 using TaskManagementSystem.Core.Dtos;
+using TaskManagementSystem.Core.Dtos.Project.GetProjectById;
 using TaskManagementSystem.Core.Dtos.Project.GetProjectPagedList;
 
 namespace TaskManagementSystem.Api.Controllers;
@@ -30,6 +32,14 @@ public sealed class ProjectController(
     {
         var query = mapper.Map<GetProjectPagedListQuery>(request);
         return Ok(await mediator.Send(query));
+    }
+
+    [HttpGet("{id:int}")]
+    [ProducesResponseType(typeof(GetProjectByIdDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetProjectById([FromRoute] int id)
+    {
+        var query = await mediator.Send(new GetProjectByIdQuery { Id = id });
+        return Ok(query);
     }
 
     [HttpDelete("{id:int}")]

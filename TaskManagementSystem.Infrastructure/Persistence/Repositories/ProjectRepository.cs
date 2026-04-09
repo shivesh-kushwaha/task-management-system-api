@@ -1,4 +1,5 @@
 ﻿using TaskManagementSystem.Core.Dtos;
+using TaskManagementSystem.Core.Dtos.Project.GetProjectById;
 using TaskManagementSystem.Core.Dtos.Project.GetProjectPagedList;
 using TaskManagementSystem.Core.Entities;
 
@@ -7,6 +8,31 @@ namespace TaskManagementSystem.Infrastructure.Persistence.Repositories;
 internal sealed class ProjectRepository(ApplicationDbContext dbContext)
     : Repository<Project>(dbContext), IProjectRepository
 {
+    public async Task<GetProjectByIdDto?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+    {
+        return await dbContext.Projects.AsNoTracking()
+            .Include(p => p.Team)
+            .Include(p => p.WorkItems
+                .Where(wi => wi.Status != Core.Enums.RecordStatusEnum.Deleted))
+            .Where(p => p.Id == id
+                && p.Status != Core.Enums.RecordStatusEnum.Deleted)
+            .Select(p => new GetProjectByIdDto
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Type = p.Type,
+                Status = p.Status,
+                CreatedAt = p.CreatedAt,
+                CreatedById = p.CreatedById,
+                UpdatedAt = p.UpdatedAt,
+                UpdatedById = p.UpdatedById,
+                TeamName = p.Team != null ? p.Team.Name : string.Empty,
+                TotalWorkItems = p.WorkItems.Count,
+            })
+            .SingleOrDefaultAsync(cancellationToken);
+    }
+    
     public async Task<PagedListResponseDto<GetProjectPagedListDto>> GetPagedListAsync(
     PagedListRequestDto request,
     CancellationToken cancellationToken)
