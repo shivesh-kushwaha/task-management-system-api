@@ -1,4 +1,5 @@
 ﻿using TaskManagementSystem.Application.Commands.Project.AddProject;
+using TaskManagementSystem.Application.Commands.Project.DeleteProject;
 using TaskManagementSystem.Application.Commands.Project.Dtos;
 using TaskManagementSystem.Application.Queries.Project.GetProjectPagedList;
 using TaskManagementSystem.Core.Dtos;
@@ -29,5 +30,13 @@ public sealed class ProjectController(
     {
         var query = mapper.Map<GetProjectPagedListQuery>(request);
         return Ok(await mediator.Send(query));
+    }
+
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> DeleteProject([FromRoute] int id)
+    {
+        await mediator.Send(new DeleteProjectCommand { Id = id });
+        return Ok();
     }
 }
