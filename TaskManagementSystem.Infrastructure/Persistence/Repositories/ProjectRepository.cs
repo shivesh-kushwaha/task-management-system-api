@@ -14,53 +14,53 @@ internal sealed class ProjectRepository(ApplicationDbContext dbContext)
         var sortExpression = request.SortExpression();
         var recordToSkip = request.RecordsToSkip();
 
-        var response = from p in dbContext.Projects.AsNoTracking()
-                       .Include(x => x.WorkItems
-                            .Where(w => w.Status != Core.Enums.RecordStatusEnum.Deleted))
+        var query = from p in dbContext.Projects.AsNoTracking()
+                    .Include(x => x.WorkItems.Where(w => w.Status != Core.Enums.RecordStatusEnum.Deleted))
+                    join u in dbContext.Users.AsNoTracking()
+                        on p.CreatedById equals u.Id into groupedUsers
+                    from user in groupedUsers.DefaultIfEmpty()
+                    join t in dbContext.Teams.AsNoTracking()
+                        on p.TeamId equals t.Id into groupedTeams
+                    from team in groupedTeams.DefaultIfEmpty()
+                    where p.Status != Core.Enums.RecordStatusEnum.Deleted
+                        && (user == null || user.Status != Core.Enums.RecordStatusEnum.Deleted)
+                        && (team == null || team.Status != Core.Enums.RecordStatusEnum.Deleted)
+                    select new { p, user, team };
 
-                       join u in dbContext.Users.AsNoTracking()
-                            on p.CreatedById equals u.Id
-                            into groupedUsers
-                       from user in groupedUsers.DefaultIfEmpty()
+        // Apply filter
+        if (!string.IsNullOrWhiteSpace(request.FilterKey))
+        {
+            var filterKey = request.FilterKey.Trim().ToUpper();
+            query = query.Where(x =>
+                EF.Functions.Like(x.p.Name.Trim().ToUpper(), $"%{filterKey}%") ||
+                (x.user != null && EF.Functions.Like((x.user.FirstName.Trim() + " " + x.user.LastName.Trim()).ToUpper(), $"%{filterKey}%"))
+            );
+        }
 
-                       join t in dbContext.Teams.AsNoTracking()
-                            on p.TeamId equals t.Id
-                            into groupedTeams
-                       from team in groupedTeams.DefaultIfEmpty()
-
-                       where p.Status != Core.Enums.RecordStatusEnum.Deleted
-                          && user == null || user.Status != Core.Enums.RecordStatusEnum.Deleted
-                          && team == null || team.Status != Core.Enums.RecordStatusEnum.Deleted
-                          && (string.IsNullOrEmpty(request.FilterKey)
-                              || EF.Functions.Like(p.Name.Trim().ToUpper(),
-                                    $"%{request.FilterKey.Trim().ToUpper()}%")
-                              || EF.Functions.Like(team.Name.Trim().ToUpper(),
-                                    $"%{request.FilterKey.Trim().ToUpper()}%")
-                              || EF.Functions.Like(
-                                    (user.FirstName.Trim() + " " + user.LastName.Trim()).ToUpper(),
-                                    $"%{request.FilterKey.Trim().ToUpper()}%"))
-
-                       select new GetProjectPagedListDto
-                       {
-                           Id = p.Id,
-                           Name = p.Name,
-                           Description = p.Description,
-                           Type = p.Type,
-                           CreatedByFirstName = user != null ? user.FirstName : string.Empty,
-                           CreatedByLastName = user != null ? user.LastName : string.Empty,
-                           TeamId = team != null ? team.Id : null,
-                           TeamName = team != null ? team.Name : null,
-                           TotalWorkItem = p.WorkItems.Count,
-                       };
+        // Project to DTO
+        var response = query.Select(x => new GetProjectPagedListDto
+        {
+            Id = x.p.Id,
+            Name = x.p.Name,
+            Description = x.p.Description,
+            Type = x.p.Type,
+            CreatedAt = x.p.CreatedAt,
+            CreatedByFirstName = x.user != null ? x.user.FirstName : string.Empty,
+            CreatedByLastName = x.user != null ? x.user.LastName : string.Empty,
+            CreatedByFullName = x.user != null ? x.user.FirstName + " " + x.user.LastName : string.Empty,
+            TeamId = x.team != null ? x.team.Id : null,
+            TeamName = x.team != null ? x.team.Name : null,
+            TotalWorkItem = x.p.WorkItems.Count(w => w.Status != Core.Enums.RecordStatusEnum.Deleted)
+        });
 
         return new PagedListResponseDto<GetProjectPagedListDto>
         {
             TotalCount = await response.CountAsync(cancellationToken),
             Items = await response
-                            .OrderBy(sortExpression)
-                            .Skip(recordToSkip)
-                            .Take(request.PageSize)
-                            .ToListAsync(cancellationToken)
+                        .OrderBy(sortExpression)
+                        .Skip(recordToSkip)
+                        .Take(request.PageSize)
+                        .ToListAsync(cancellationToken)
         };
     }
 }

@@ -8,8 +8,10 @@ public sealed record GetProjectPagedListDto
     public string Name { get; set; } = null!;
     public string? Description { get; set; }
     public ProjectTypeEnum Type { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
     public string CreatedByFirstName { get; set; } = null!;
     public string CreatedByLastName { get; set; } = null!;
+    public string CreatedByFullName { get; set; } = null!;
 
     // Team
     public int? TeamId { get; set; }
