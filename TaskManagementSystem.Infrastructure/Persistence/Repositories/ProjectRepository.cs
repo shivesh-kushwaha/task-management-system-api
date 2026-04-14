@@ -10,27 +10,37 @@ internal sealed class ProjectRepository(ApplicationDbContext dbContext)
 {
     public async Task<GetProjectByIdDto?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        return await dbContext.Projects.AsNoTracking()
+        var query = from p in dbContext.Projects.AsNoTracking()
             .Include(p => p.Team)
-            .Include(p => p.WorkItems
-                .Where(wi => wi.Status != Core.Enums.RecordStatusEnum.Deleted))
-            .Where(p => p.Id == id
-                && p.Status != Core.Enums.RecordStatusEnum.Deleted)
-            .Select(p => new GetProjectByIdDto
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                Type = p.Type,
-                Status = p.Status,
-                CreatedAt = p.CreatedAt,
-                CreatedById = p.CreatedById,
-                UpdatedAt = p.UpdatedAt,
-                UpdatedById = p.UpdatedById,
-                TeamName = p.Team != null ? p.Team.Name : string.Empty,
-                TotalWorkItems = p.WorkItems.Count,
-            })
-            .SingleOrDefaultAsync(cancellationToken);
+            .Include(p => p.WorkItems.Where(wi => wi.Status != Core.Enums.RecordStatusEnum.Deleted))
+                    where p.Id == id && p.Status != Core.Enums.RecordStatusEnum.Deleted
+                    join createdBy in dbContext.Users.AsNoTracking()
+                        on p.CreatedById equals createdBy.Id into createdByGroup
+                    from createdUser in createdByGroup.DefaultIfEmpty()
+                    join updatedBy in dbContext.Users.AsNoTracking()
+                        on p.UpdatedById equals updatedBy.Id into updatedByGroup
+                    from updatedUser in updatedByGroup.DefaultIfEmpty()
+                    select new GetProjectByIdDto
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Description = p.Description,
+                        Type = p.Type,
+                        Status = p.Status,
+                        CreatedAt = p.CreatedAt,
+                        CreatedById = p.CreatedById,
+                        UpdatedAt = p.UpdatedAt,
+                        UpdatedById = p.UpdatedById,
+                        TeamName = p.Team != null ? p.Team.Name : string.Empty,
+                        TotalWorkItems = p.WorkItems.Count(wi => wi.Status != Core.Enums.RecordStatusEnum.Deleted),
+                        // User information
+                        CreatedByFirstName = createdUser != null ? createdUser.FirstName : string.Empty,
+                        CreatedByLastName = createdUser != null ? createdUser.LastName : null,
+                        UpdatedByFirstName = updatedUser != null ? updatedUser.FirstName : null,
+                        UpdatedByLastName = updatedUser != null ? updatedUser.LastName : null
+                    };
+
+        return await query.SingleOrDefaultAsync(cancellationToken);
     }
     
     public async Task<PagedListResponseDto<GetProjectPagedListDto>> GetPagedListAsync(
