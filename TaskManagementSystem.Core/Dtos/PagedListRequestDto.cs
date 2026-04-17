@@ -1,6 +1,6 @@
 ﻿namespace TaskManagementSystem.Core.Dtos;
 
-public sealed record PagedListRequestDto
+public record PagedListRequestDto
 {
     public string? FilterKey { get; set; }
     public string Sort { get; set; } = string.Empty;

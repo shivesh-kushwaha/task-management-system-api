@@ -1,6 +1,4 @@
-﻿// Project.cs
-using TaskManagementSystem.Core.Enums;
-namespace TaskManagementSystem.Core.Entities;
+﻿namespace TaskManagementSystem.Core.Entities;
 
 public sealed class Project : BaseEntity
 {
