@@ -8,11 +8,12 @@ public sealed class WorkItem : BaseEntity
     public string Title { get; set; } = string.Empty;
     public string? Description { get; set; }
     public int? TypeId { get; set; }
-    public int? AssignedToId { get; set; }                   // ✅ Nullable to allow SetNull on delete
+    public int? AssignedToId { get; set; }
     public DateTimeOffset DueDate { get; set; }
-    public Project? Project { get; set; }                    // ✅ Added navigation property
-    public WorkItem? Parent { get; set; }                    // ✅ Added self-ref navigation
+    public WorkItemPriorityEnum Priority { get; set; }
+    public Project? Project { get; set; }
+    public WorkItem? Parent { get; set; }
     public WorkItemType? Type { get; set; }
     public ICollection<WorkItem> SubTasks { get; set; } = [];
-    public User? AssignedTo { get; set; }                    // ✅ Nullable to match nullable FK
+    public User? AssignedTo { get; set; }
 }
