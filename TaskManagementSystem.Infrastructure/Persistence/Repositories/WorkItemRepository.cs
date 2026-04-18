@@ -52,7 +52,8 @@ internal sealed class WorkItemRepository(ApplicationDbContext dbContext)
                     .SingleOrDefaultAsync(cancellationToken);
     }
 
-    public async Task<PagedListResponseDto<GetWorkItemPagedListDto>> GetPagedListAsync(WorkItemPagedListRequestDto request, CancellationToken cancellationToken = default)
+    public async Task<PagedListResponseDto<GetWorkItemPagedListDto>> GetPagedListAsync(
+        WorkItemPagedListRequestDto request, CancellationToken cancellationToken = default)
     {
         var sortExpression = request.SortExpression();
         var recordToSkip = request.RecordsToSkip();

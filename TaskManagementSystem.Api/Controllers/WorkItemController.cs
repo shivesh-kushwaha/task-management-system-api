@@ -1,11 +1,11 @@
 ﻿using TaskManagementSystem.Application.Commands.WorkItem.AddWorkItem;
-using TaskManagementSystem.Application.Commands.WorkItem.Dtos;
-using TaskManagementSystem.Application.Queries.Project.GetProjectPagedList;
+using TaskManagementSystem.Application.Commands.WorkItem.UpdateWorkItem;
 using TaskManagementSystem.Application.Queries.WorkItem.GetWorkItemById;
 using TaskManagementSystem.Application.Queries.WorkItem.GetWorkItemPagedList;
 using TaskManagementSystem.Core.Dtos;
-using TaskManagementSystem.Core.Dtos.Project.GetProjectPagedList;
+using TaskManagementSystem.Core.Dtos.WorkItem.AddWorkItem;
 using TaskManagementSystem.Core.Dtos.WorkItem.GetWorkItemPagedList;
+using TaskManagementSystem.Core.Dtos.WorkItem.UpdateWorkItem;
 
 namespace TaskManagementSystem.Api.Controllers;
 
@@ -38,5 +38,14 @@ public sealed class WorkItemController(
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
         return Ok(await mediator.Send(new GetWorkItemByIdQuery { Id = id }));
+    }
+
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> UpdateWorkItem([FromBody] UpdateWorkItemDto request)
+    {
+        var command = mapper.Map<UpdateWorkItemCommand>(request);
+        await mediator.Send(command);
+        return Ok();
     }
 }

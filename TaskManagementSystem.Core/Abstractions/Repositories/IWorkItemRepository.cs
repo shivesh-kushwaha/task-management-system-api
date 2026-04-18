@@ -7,6 +7,6 @@ namespace TaskManagementSystem.Core.Abstractions.Repositories;
 
 public interface IWorkItemRepository: IRepository<WorkItem>
 {
-    Task<GetWorkItemByIdDto> GetByIdAsync(int id, CancellationToken cancellationToken = default);
+    Task<GetWorkItemByIdDto?> GetByIdAsync(int id, CancellationToken cancellationToken = default);
     Task<PagedListResponseDto<GetWorkItemPagedListDto>> GetPagedListAsync(WorkItemPagedListRequestDto request, CancellationToken cancellationToken = default);
 }

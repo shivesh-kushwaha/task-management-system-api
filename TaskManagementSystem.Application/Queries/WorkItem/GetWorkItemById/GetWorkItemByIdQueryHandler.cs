@@ -8,6 +8,7 @@ internal sealed class GetWorkItemByIdQueryHandler(
 {
     public async Task<GetWorkItemByIdDto> Handle(GetWorkItemByIdQuery request, CancellationToken cancellationToken)
     {
-        return await workItemRepository.GetByIdAsync(request.Id, cancellationToken);
+        return await workItemRepository.GetByIdAsync(request.Id, cancellationToken)
+            ?? throw new InvalidOperationException("Work item not found.");
     }
 }

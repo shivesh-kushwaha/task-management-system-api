@@ -8,4 +8,14 @@ internal sealed class WorkItemTypeRepository(ApplicationDbContext dbContext): IW
     {
         await dbContext.WorkItemTypes.AddAsync(workItemType);
     }
+
+    public async Task<WorkItemType?> FindAsync(int id, CancellationToken cancellationToken = default)
+    {
+        return await dbContext.WorkItemTypes.FindAsync(id, cancellationToken);
+    }
+
+    public void Update(WorkItemType workItemType)
+    {
+        dbContext.Update(workItemType);
+    }
 }
