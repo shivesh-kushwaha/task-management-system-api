@@ -1,6 +1,7 @@
 ﻿using TaskManagementSystem.Application.Commands.WorkItem.AddWorkItem;
 using TaskManagementSystem.Application.Commands.WorkItem.Dtos;
 using TaskManagementSystem.Application.Queries.Project.GetProjectPagedList;
+using TaskManagementSystem.Application.Queries.WorkItem.GetWorkItemById;
 using TaskManagementSystem.Application.Queries.WorkItem.GetWorkItemPagedList;
 using TaskManagementSystem.Core.Dtos;
 using TaskManagementSystem.Core.Dtos.Project.GetProjectPagedList;
@@ -30,5 +31,12 @@ public sealed class WorkItemController(
     {
         var query = mapper.Map<GetWorkItemPagedListQuery>(request);
         return Ok(await mediator.Send(query));
+    }
+
+    [HttpGet("{id:int}")]
+    [ProducesResponseType(typeof(PagedListResponseDto<GetWorkItemPagedListDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetById([FromRoute] int id)
+    {
+        return Ok(await mediator.Send(new GetWorkItemByIdQuery { Id = id }));
     }
 }
