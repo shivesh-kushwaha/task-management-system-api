@@ -1,11 +1,13 @@
 ﻿using TaskManagementSystem.Application.Commands.Project.AddProject;
 using TaskManagementSystem.Application.Commands.Project.DeleteProject;
-using TaskManagementSystem.Application.Commands.Project.Dtos;
+using TaskManagementSystem.Application.Commands.Project.UpdateProject;
 using TaskManagementSystem.Application.Queries.Project.GetProjectById;
 using TaskManagementSystem.Application.Queries.Project.GetProjectPagedList;
 using TaskManagementSystem.Core.Dtos;
+using TaskManagementSystem.Core.Dtos.Project.AddProject;
 using TaskManagementSystem.Core.Dtos.Project.GetProjectById;
 using TaskManagementSystem.Core.Dtos.Project.GetProjectPagedList;
+using TaskManagementSystem.Core.Dtos.Project.UpdateProject;
 
 namespace TaskManagementSystem.Api.Controllers;
 
@@ -40,6 +42,15 @@ public sealed class ProjectController(
     {
         var query = await mediator.Send(new GetProjectByIdQuery { Id = id });
         return Ok(query);
+    }
+
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> UpdateProject([FromBody] UpdateProjectDto request)
+    {
+        var command = mapper.Map<UpdateProjectCommand>(request);
+        await mediator.Send(command);
+        return Ok();
     }
 
     [HttpDelete("{id:int}")]

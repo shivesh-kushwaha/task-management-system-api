@@ -1,4 +1,5 @@
 ﻿using TaskManagementSystem.Application.Commands.WorkItem.AddWorkItem;
+using TaskManagementSystem.Application.Commands.WorkItem.DeleteWorkItem;
 using TaskManagementSystem.Application.Commands.WorkItem.UpdateWorkItem;
 using TaskManagementSystem.Application.Queries.WorkItem.GetWorkItemById;
 using TaskManagementSystem.Application.Queries.WorkItem.GetWorkItemPagedList;
@@ -46,6 +47,14 @@ public sealed class WorkItemController(
     {
         var command = mapper.Map<UpdateWorkItemCommand>(request);
         await mediator.Send(command);
+        return Ok();
+    }
+
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> DeleteWorkItem([FromRoute] int id)
+    {
+        await mediator.Send(new DeleteWorkItemCommand {  Id = id});
         return Ok();
     }
 }
