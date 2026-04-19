@@ -1,6 +1,6 @@
-﻿namespace TaskManagementSystem.Application.Commands.WorkItem.Dtos;
+﻿namespace TaskManagementSystem.Core.Dtos.WorkItem.AddWorkItem;
 
-public sealed record AddWorkItemDto
+public record AddWorkItemDto
 {
     public int? ProjectId { get; set; }
     public int? ParentId { get; set; }

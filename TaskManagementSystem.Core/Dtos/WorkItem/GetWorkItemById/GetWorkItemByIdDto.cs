@@ -1,6 +1,6 @@
 ﻿namespace TaskManagementSystem.Core.Dtos.WorkItem.GetWorkItemById;
 
-public sealed record GetWorkItemByIdDto
+public sealed record GetWorkItemByIdDto: GetUserInformationDto
 {
     public int Id { get; set; }
     public int? ParentId { get; set; }
@@ -14,6 +14,5 @@ public sealed record GetWorkItemByIdDto
     public DateTimeOffset CreateadAt { get; set; }
     public RecordStatusEnum Status { get; set; }
     public WorkItemPriorityEnum Priority { get; set; }
-    public string CreatedByFullName { get; set; } = null!;
     public int TotalSubTasks { get; set; }
 }
