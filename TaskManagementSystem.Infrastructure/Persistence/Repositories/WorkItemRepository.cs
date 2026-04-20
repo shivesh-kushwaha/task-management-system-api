@@ -60,31 +60,29 @@ internal sealed class WorkItemRepository(ApplicationDbContext dbContext)
 
         var query = from wi in dbContext.WorkItems.AsNoTracking()
                     join wit in dbContext.WorkItemTypes.AsNoTracking()
-                        on wi.TypeId equals wit.Id into groupedWorkItemTypes
-                    from workItemType in groupedWorkItemTypes
+                        on wi.TypeId equals wit.Id into witGroup
+                    from workItemType in witGroup.DefaultIfEmpty()
                     join u in dbContext.Users.AsNoTracking()
-                        on wi.CreatedById equals u.CreatedById into groupedUsers
-                    from user in groupedUsers
-                    where (wi.ParentId == null
-                            || wi.ParentId == request.ParentId)
-                        && wi.Status != RecordStatusEnum.Deleted
-                        && (workItemType == null
-                            || workItemType.Status != RecordStatusEnum.Deleted)
-                        && (user == null
-                            || user.Status != RecordStatusEnum.Deleted)
+                        on wi.CreatedById equals u.Id into userGroup
+                    from user in userGroup.DefaultIfEmpty()
+                    where wi.Status != RecordStatusEnum.Deleted
+                          && (workItemType == null || workItemType.Status != RecordStatusEnum.Deleted)
+                          && (user == null || user.Status != RecordStatusEnum.Deleted)
                     select new { wi, workItemType, user };
+
+        if (request.ParentId.HasValue)
+            query = query.Where(x => x.wi.ParentId == request.ParentId.Value);
+        else
+            query = query.Where(x => x.wi.ParentId == null);
 
         if (!string.IsNullOrEmpty(request.FilterKey))
         {
             var filterKey = request.FilterKey.Trim().ToUpper();
             query = query.Where(x =>
-                EF.Functions.Like(x.wi.Title.Trim().ToUpper(), $"%{filterKey}%")
-
-                || (x.workItemType != null
-                    && EF.Functions.Like(x.workItemType.Name.Trim().ToUpper(), $"%{filterKey}%"))
-
-                || (x.user != null
-                    && EF.Functions.Like(x.user.FirstName.Trim().ToUpper() + " " + x.user.LastName.Trim().ToUpper(), $"%{filterKey}%")));
+                EF.Functions.Like(x.wi.Title.Trim().ToUpper(), $"%{filterKey}%") ||
+                (x.workItemType != null && EF.Functions.Like(x.workItemType.Name.Trim().ToUpper(), $"%{filterKey}%")) ||
+                (x.user != null && EF.Functions.Like((x.user.FirstName.Trim() + " " + x.user.LastName.Trim()).ToUpper(), $"%{filterKey}%"))
+            );
         }
 
         var response = query.Select(x => new GetWorkItemPagedListDto
@@ -92,20 +90,20 @@ internal sealed class WorkItemRepository(ApplicationDbContext dbContext)
             Id = x.wi.Id,
             Title = x.wi.Title,
             Description = x.wi.Description,
-            CreateadAt = x.wi.CreatedAt,
-            Type = x.workItemType.Name,
+            CreatedAt = x.wi.CreatedAt,
+            Type = x.workItemType != null ? x.workItemType.Name : null,
             ParentId = x.wi.ParentId,
             DueDate = x.wi.DueDate,
             Status = x.wi.Status,
             AssignedToId = x.wi.AssignedToId,
             Priority = x.wi.Priority,
             TotalSubTasks = x.wi.SubTasks.Count(st => st.Status != RecordStatusEnum.Deleted),
-            CreatedByFullName = x.user == null ? string.Empty : x.user.FirstName + " " + x.user.LastName
+            CreatedByFullName = x.user != null ? x.user.FirstName + " " + x.user.LastName : string.Empty
         });
 
         return new PagedListResponseDto<GetWorkItemPagedListDto>
         {
-            TotalCount = await response.CountAsync(),
+            TotalCount = await response.CountAsync(cancellationToken),
             Items = await response
                         .OrderBy(sortExpression)
                         .Skip(recordToSkip)
