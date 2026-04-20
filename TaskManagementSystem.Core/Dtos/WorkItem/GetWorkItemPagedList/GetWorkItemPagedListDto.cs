@@ -9,7 +9,7 @@ public sealed record GetWorkItemPagedListDto
     public string? Type { get; set; }
     public int? AssignedToId { get; set; }
     public DateTimeOffset DueDate { get; set; }
-    public DateTimeOffset CreateadAt { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
     public RecordStatusEnum Status { get; set; }
     public WorkItemPriorityEnum Priority { get; set; }
     public string CreatedByFullName { get; set; } = null!;

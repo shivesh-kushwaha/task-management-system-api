@@ -2,6 +2,7 @@
 using TaskManagementSystem.Application.Commands.WorkItem.DeleteWorkItem;
 using TaskManagementSystem.Application.Commands.WorkItem.UpdateWorkItem;
 using TaskManagementSystem.Application.Queries.WorkItem.GetWorkItemById;
+using TaskManagementSystem.Application.Queries.WorkItem.GetWorkItemListItem;
 using TaskManagementSystem.Application.Queries.WorkItem.GetWorkItemPagedList;
 using TaskManagementSystem.Core.Dtos;
 using TaskManagementSystem.Core.Dtos.WorkItem.AddWorkItem;
@@ -41,6 +42,13 @@ public sealed class WorkItemController(
         return Ok(await mediator.Send(new GetWorkItemByIdQuery { Id = id }));
     }
 
+    [HttpGet("select-list-item")]
+    [ProducesResponseType(typeof(IList<SelectListItemDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetWorkItemListItem()
+    {
+        return Ok(await mediator.Send(new GetWorkItemListItemQuery()));
+    }
+
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateWorkItem([FromBody] UpdateWorkItemDto request)
@@ -54,7 +62,7 @@ public sealed class WorkItemController(
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> DeleteWorkItem([FromRoute] int id)
     {
-        await mediator.Send(new DeleteWorkItemCommand {  Id = id});
+        await mediator.Send(new DeleteWorkItemCommand { Id = id });
         return Ok();
     }
 }

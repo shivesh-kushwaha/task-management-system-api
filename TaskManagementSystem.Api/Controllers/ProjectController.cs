@@ -2,6 +2,7 @@
 using TaskManagementSystem.Application.Commands.Project.DeleteProject;
 using TaskManagementSystem.Application.Commands.Project.UpdateProject;
 using TaskManagementSystem.Application.Queries.Project.GetProjectById;
+using TaskManagementSystem.Application.Queries.Project.GetProjectListItem;
 using TaskManagementSystem.Application.Queries.Project.GetProjectPagedList;
 using TaskManagementSystem.Core.Dtos;
 using TaskManagementSystem.Core.Dtos.Project.AddProject;
@@ -41,6 +42,14 @@ public sealed class ProjectController(
     public async Task<IActionResult> GetProjectById([FromRoute] int id)
     {
         var query = await mediator.Send(new GetProjectByIdQuery { Id = id });
+        return Ok(query);
+    }
+
+    [HttpGet("select-list-item")]
+    [ProducesResponseType(typeof(IList<SelectListItemDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetProjectListItem()
+    {
+        var query = await mediator.Send(new GetProjectListItemQuery());
         return Ok(query);
     }
 
