@@ -13,9 +13,9 @@ internal sealed class WorkItemConfiguration : BaseEntityConfiguration<WorkItem>
         builder.Property(x => x.Description).HasMaxLength(500);
         builder.Property(x => x.DueDate).IsRequired();
         builder.Property(x => x.Priority).IsRequired();
+        builder.Property(x => x.TypeId).IsRequired();
         builder.Property(x => x.ProjectId);
         builder.Property(x => x.ParentId);
-        builder.Property(x => x.TypeId);
         builder.Property(x => x.AssignedToId);
 
         // Relationships

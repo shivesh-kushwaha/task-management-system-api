@@ -19,7 +19,6 @@ public sealed class WorkItemController(
 {
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> AddWorkItem([FromBody] AddWorkItemDto request)
     {
         var command = mapper.Map<AddWorkItemCommand>(request);
