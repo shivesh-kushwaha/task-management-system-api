@@ -21,11 +21,15 @@ internal sealed class WorkItemRepository(ApplicationDbContext dbContext)
                       join updatedBy in dbContext.Users.AsNoTracking()
                           on wi.UpdatedById equals updatedBy.Id into updatedByGroup
                       from updatedBy in updatedByGroup.DefaultIfEmpty()
+                      join project in dbContext.Projects.AsNoTracking()
+                          on wi.ProjectId equals project.Id into projectGroup
+                      from project in projectGroup.DefaultIfEmpty()
                       where wi.Id == id
                           && wi.Status != RecordStatusEnum.Deleted
                           && (workItemType == null || workItemType.Status != RecordStatusEnum.Deleted)
                           && (createdUser == null || createdUser.Status != RecordStatusEnum.Deleted)
                           && (updatedBy == null || updatedBy.Status != RecordStatusEnum.Deleted)
+                          && (project == null || project.Status != RecordStatusEnum.Deleted)
                       select new GetWorkItemByIdDto
                       {
                           Id = wi.Id,
@@ -43,6 +47,8 @@ internal sealed class WorkItemRepository(ApplicationDbContext dbContext)
                           Status = wi.Status,
                           Priority = wi.Priority,
                           Type = workItemType.Name,
+                          ProjectId = wi.ProjectId,
+                          ProjectName = project == null ? string.Empty : project.Name,
                           AssignedToName = wi.AssignedTo == null ? string.Empty : $"{wi.AssignedTo!.FirstName} {wi.AssignedTo!.LastName}",
                           CreatedByFirstName = createdUser == null ? string.Empty : createdUser.FirstName,
                           CreatedByLastName = createdUser == null ? string.Empty : createdUser.LastName,
@@ -65,10 +71,14 @@ internal sealed class WorkItemRepository(ApplicationDbContext dbContext)
                     join u in dbContext.Users.AsNoTracking()
                         on wi.CreatedById equals u.Id into userGroup
                     from user in userGroup.DefaultIfEmpty()
+                    join p in dbContext.Projects.AsNoTracking()
+                        on wi.ProjectId equals p.Id into projectGroup
+                    from project in projectGroup.DefaultIfEmpty()
                     where wi.Status != RecordStatusEnum.Deleted
                           && (workItemType == null || workItemType.Status != RecordStatusEnum.Deleted)
                           && (user == null || user.Status != RecordStatusEnum.Deleted)
-                    select new { wi, workItemType, user };
+                          && (project == null || project.Status != RecordStatusEnum.Deleted)
+                    select new { wi, workItemType, user, project };
 
         if (request.ParentId.HasValue)
             query = query.Where(x => x.wi.ParentId == request.ParentId.Value);
@@ -94,6 +104,7 @@ internal sealed class WorkItemRepository(ApplicationDbContext dbContext)
             Type = x.workItemType != null ? x.workItemType.Name : null,
             ParentId = x.wi.ParentId,
             ProjectId = x.wi.ProjectId,
+            ProjectName = x.project == null ? string.Empty : x.project.Name,
             DueDate = x.wi.DueDate,
             Status = x.wi.Status,
             AssignedToId = x.wi.AssignedToId,
