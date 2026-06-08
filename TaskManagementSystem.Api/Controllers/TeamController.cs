@@ -1,7 +1,7 @@
 ﻿using TaskManagementSystem.Application.Commands.Team.AddTeam;
-using TaskManagementSystem.Application.Commands.Team.Dtos;
 using TaskManagementSystem.Application.Queries.Team.GetTeamListItem;
 using TaskManagementSystem.Core.Dtos;
+using TaskManagementSystem.Core.Dtos.Team.AddTeam;
 
 namespace TaskManagementSystem.Api.Controllers
 {
