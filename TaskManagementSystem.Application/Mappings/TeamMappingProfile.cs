@@ -1,5 +1,5 @@
 ﻿using TaskManagementSystem.Application.Commands.Team.AddTeam;
-using TaskManagementSystem.Application.Commands.Team.Dtos;
+using TaskManagementSystem.Core.Dtos.Team.AddTeam;
 
 namespace TaskManagementSystem.Application.Mappings;
 

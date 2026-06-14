@@ -14,5 +14,7 @@ public sealed record GetWorkItemByIdDto: GetUserInformationDto
     public DateTimeOffset CreatedAt { get; set; }
     public RecordStatusEnum Status { get; set; }
     public WorkItemPriorityEnum Priority { get; set; }
+    public int? ProjectId { get; set; }
+    public string? ProjectName { get; set; }
     public int TotalSubTasks { get; set; }
 }
