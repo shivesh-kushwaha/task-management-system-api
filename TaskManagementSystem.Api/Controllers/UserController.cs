@@ -1,11 +1,13 @@
 ﻿using TaskManagementSystem.Application.Commands.User.AddUser;
 using TaskManagementSystem.Application.Commands.User.DeleteUser;
-using TaskManagementSystem.Application.Commands.User.Dtos;
+using TaskManagementSystem.Application.Commands.User.UpdateUser;
 using TaskManagementSystem.Application.Queries.User.GetUserListItem;
 using TaskManagementSystem.Application.Queries.User.GetUserPagedList;
 using TaskManagementSystem.Application.Queries.User.GetWorkItemListById;
 using TaskManagementSystem.Core.Dtos;
+using TaskManagementSystem.Core.Dtos.User.AddUser;
 using TaskManagementSystem.Core.Dtos.User.GetWorkItemListById;
+using TaskManagementSystem.Core.Dtos.User.UpdateUser;
 
 namespace TaskManagementSystem.Api.Controllers;
 
@@ -44,6 +46,14 @@ public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
     public async Task<IActionResult> GetWorkItemListById([FromRoute] int id)
     {
         return Ok(await mediator.Send(new GetWorkItemListByIdQuery { Id = id }));
+    }
+
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> Delete([FromBody] UpdateUserDto request)
+    {
+        await mediator.Send(mapper.Map<UpdateUserCommand>(request));
+        return Ok();
     }
 
     [HttpDelete("{id:int}")]

@@ -1,6 +1,5 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using TaskManagementSystem.Core.Entities;
 
 namespace TaskManagementSystem.Application.Commands.User.AddUser;
 

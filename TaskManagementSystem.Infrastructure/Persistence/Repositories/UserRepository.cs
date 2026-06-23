@@ -11,8 +11,7 @@ public sealed class UserRepository(ApplicationDbContext dbContext)
     public Task<User?> GetUserByEmailAsync(string email)
     {
         return dbContext.Users.AsNoTracking()
-            .Include(x => x.UserRoles
-                .Where(ur => ur.Status != RecordStatusEnum.Deleted))
+            .Include(x => x.UserRoles)
             .AsNoTracking()
             .Where(x => x.Email.Trim().ToUpper() == email.Trim().ToUpper())
             .FirstOrDefaultAsync();
@@ -40,6 +39,9 @@ public sealed class UserRepository(ApplicationDbContext dbContext)
         var response = query.Select(x => new GetUserPagedListDto
         {
             Id = x.Id,
+            FirstName = x.FirstName,
+            LastName = x.LastName,
+            PhoneNumber = x.PhoneNumber,
             Name = x.FirstName + " " + x.LastName,
             Email = x.Email,
             CreatedById = x.CreatedById,
@@ -49,11 +51,13 @@ public sealed class UserRepository(ApplicationDbContext dbContext)
             CreatedByLastName = x.LastName,
             UpdatedByFirstName = x.FirstName,
             UpdatedByLastName = x.LastName,
-            Roles = x.UserRoles.Select(r => new SelectListItemDto
-            {
-                Key = r.Role.Id,
-                Value = r.Role.Name
-            }).ToList()
+            Roles = x.UserRoles
+                .Where(x => x.Status != RecordStatusEnum.Deleted)
+                .Select(r => new SelectListItemDto
+                {
+                    Key = r.Role.Id,
+                    Value = r.Role.Name
+                }).ToList()
         });
 
         return new PagedListResponseDto<GetUserPagedListDto>

@@ -1,6 +1,6 @@
 ﻿namespace TaskManagementSystem.Core.Enums;
 
-public enum CommentTypeEnum
+public enum TypeEnum
 {
     Project = 1,
     Team = 2,

@@ -23,6 +23,7 @@ public static class DependencyInjection
         services.AddScoped<IWorkItemTypeRepository, WorkItemTypeRepository>();
         services.AddScoped<ICommentRepository, CommentRepository>();
         services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
+        services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
