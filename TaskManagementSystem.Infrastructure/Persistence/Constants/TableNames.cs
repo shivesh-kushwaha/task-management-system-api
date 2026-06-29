@@ -9,7 +9,7 @@ public static class TableNames
         public const string Roles = "Roles";
         public const string RolePermissions = "RolePermissions";
         public const string Users = "Users";
-        public const string UserRoles = "UserRoels";
+        public const string UserRoles = "UserRoles";
         public const string RefreshTokens = "RefreshTokens";
     }
 

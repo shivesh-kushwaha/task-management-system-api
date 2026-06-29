@@ -1,4 +1,6 @@
-﻿namespace TaskManagementSystem.Application.Commands.WorkItem.DeleteWorkItem;
+﻿using TaskManagementSystem.Application.Abstractions;
+
+namespace TaskManagementSystem.Application.Commands.WorkItem.DeleteWorkItem;
 
 public class DeleteWorkItemCommand: BaseCommand, ICommand
 {

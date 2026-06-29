@@ -1,4 +1,6 @@
-﻿namespace TaskManagementSystem.Application.Commands.User.DeleteUser;
+﻿using TaskManagementSystem.Application.Abstractions;
+
+namespace TaskManagementSystem.Application.Commands.User.DeleteUser;
 
 public class DeleteUserCommand : BaseCommand, ICommand
 {

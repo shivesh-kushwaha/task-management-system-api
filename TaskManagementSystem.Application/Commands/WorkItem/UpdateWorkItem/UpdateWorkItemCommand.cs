@@ -1,4 +1,6 @@
-﻿namespace TaskManagementSystem.Application.Commands.WorkItem.UpdateWorkItem;
+﻿using TaskManagementSystem.Application.Abstractions;
+
+namespace TaskManagementSystem.Application.Commands.WorkItem.UpdateWorkItem;
 
 public class UpdateWorkItemCommand : BaseCommand, ICommand
 {

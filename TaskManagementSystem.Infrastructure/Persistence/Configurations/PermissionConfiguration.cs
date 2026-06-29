@@ -18,6 +18,9 @@ public sealed class PermissionConfiguration: BaseEntityConfiguration<Permission>
             .HasMaxLength(50)
             .IsRequired();
 
+        builder.Property(x => x.PermissionGroupId)
+            .IsRequired();
+
         builder.HasIndex(x => x.Code)
             .IsUnique();
     }

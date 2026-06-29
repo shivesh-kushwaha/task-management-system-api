@@ -4,10 +4,12 @@ using TaskManagementSystem.Application.Commands.User.UpdateUser;
 using TaskManagementSystem.Application.Queries.User.GetUserListItem;
 using TaskManagementSystem.Application.Queries.User.GetUserPagedList;
 using TaskManagementSystem.Application.Queries.User.GetWorkItemListById;
+using TaskManagementSystem.Core.Constants;
 using TaskManagementSystem.Core.Dtos;
 using TaskManagementSystem.Core.Dtos.User.AddUser;
 using TaskManagementSystem.Core.Dtos.User.GetWorkItemListById;
 using TaskManagementSystem.Core.Dtos.User.UpdateUser;
+using static TaskManagementSystem.Api.Filters.AuthorizationPermissionFilter;
 
 namespace TaskManagementSystem.Api.Controllers;
 
@@ -27,6 +29,7 @@ public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
     }
 
     [HttpGet("paged-list")]
+    [AuthorizePermission(Core.Enums.PermissionMatchTypeEnum.Any, PermissionCodeConstant.User.ViewUser, PermissionCodeConstant.User.CreateUser)]
     [ProducesResponseType(typeof(IList<SelectListItemDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetPagedList([FromQuery] PagedListRequestDto request)
     {

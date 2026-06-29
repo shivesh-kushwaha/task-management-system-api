@@ -1,4 +1,6 @@
-﻿namespace TaskManagementSystem.Application.Commands.Comment.AddComment;
+﻿using TaskManagementSystem.Application.Abstractions;
+
+namespace TaskManagementSystem.Application.Commands.Comment.AddComment;
 
 public class AddCommentCommand: BaseCommand, ICommand
 {

@@ -1,4 +1,6 @@
-﻿namespace TaskManagementSystem.Application.Commands.WorkItem.AddWorkItem;
+﻿using TaskManagementSystem.Application.Abstractions;
+
+namespace TaskManagementSystem.Application.Commands.WorkItem.AddWorkItem;
 
 public class AddWorkItemCommand: BaseCommand, ICommand
 {

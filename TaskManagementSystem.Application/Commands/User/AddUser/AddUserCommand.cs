@@ -1,4 +1,6 @@
-﻿namespace TaskManagementSystem.Application.Commands.User.AddUser;
+﻿using TaskManagementSystem.Application.Abstractions;
+
+namespace TaskManagementSystem.Application.Commands.User.AddUser;
 
 public class AddUserCommand: BaseCommand, ICommand
 {

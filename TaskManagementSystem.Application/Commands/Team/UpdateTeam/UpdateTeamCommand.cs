@@ -1,4 +1,6 @@
-﻿namespace TaskManagementSystem.Application.Commands.Team.UpdateTeam;
+﻿using TaskManagementSystem.Application.Abstractions;
+
+namespace TaskManagementSystem.Application.Commands.Team.UpdateTeam;
 
 public class UpdateTeamCommand : BaseCommand, ICommand
 {

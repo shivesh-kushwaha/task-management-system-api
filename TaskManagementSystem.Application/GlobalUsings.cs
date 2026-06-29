@@ -8,3 +8,4 @@ global using AutoMapper;
 global using TaskManagementSystem.Application.Abstractions.Services;
 global using TaskManagementSystem.Application.Abstractions.Queries;
 global using TaskManagementSystem.Core.Dtos;
+global using TaskManagementSystem.Application.Abstractions;

@@ -1,4 +1,4 @@
-﻿namespace TaskManagementSystem.Application.Commands;
+﻿namespace TaskManagementSystem.Application.Abstractions;
 
 public abstract class BaseCommand
 {

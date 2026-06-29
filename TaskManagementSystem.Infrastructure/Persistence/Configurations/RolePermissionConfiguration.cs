@@ -10,7 +10,10 @@ public sealed class RolePermissionConfiguration : BaseEntityConfiguration<RolePe
 
         builder.ToTable(TableNames.Identity.RolePermissions);
 
-        builder.HasIndex(x => new { x.RoleId, x.PermissionId })
-            .IsUnique();
+        builder.Property(x => x.RoleId)
+            .IsRequired();
+
+        builder.Property(x => x.PermissionId)
+            .IsRequired();
     }
 }
