@@ -26,21 +26,19 @@ public class AuthorizationPermissionFilter
                 throw new UnauthorizedAccessException("Access denied!");
             }
 
-            var roleIdsClaim = user.FindFirst("RoleIds")?.Value;
+            var roleCodesClaim = user.FindFirst("RoleCodes")?.Value;
 
-            if (string.IsNullOrEmpty(roleIdsClaim))
+            if (string.IsNullOrEmpty(roleCodesClaim))
             {
                 throw new UnauthorizedAccessException("Access denied!");
             }
 
-            var roleIds = roleIdsClaim
+            var roleCodes = roleCodesClaim
                 .Split(',', StringSplitOptions.RemoveEmptyEntries)
-                .Select(id => int.TryParse(id.Trim(), out var parsed) ? parsed : (int?)null)
-                .Where(id => id.HasValue)
-                .Select(id => id!.Value)
+                .Select(x => x)
                 .ToList();
 
-            if (!roleIds.Any())
+            if (!roleCodes.Any())
             {
                 throw new UnauthorizedAccessException("Access denied!");
             }
@@ -49,7 +47,7 @@ public class AuthorizationPermissionFilter
                 .GetRequiredService<IPermissionService>();
 
             var hasPermissions = await permissionService.HasPermissionAsync(
-                roleIds,
+                roleCodes,
                 _requiredPermissions,
                 _matchType,
                 context.HttpContext.RequestAborted);

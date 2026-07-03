@@ -29,7 +29,7 @@ public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
     }
 
     [HttpGet("paged-list")]
-    [AuthorizePermission(Core.Enums.PermissionMatchTypeEnum.Any, PermissionCodeConstant.User.ViewUser, PermissionCodeConstant.User.CreateUser)]
+    [AuthorizePermission(Core.Enums.PermissionMatchTypeEnum.Any, PermissionCodeConstant.User.AddUser)]
     [ProducesResponseType(typeof(IList<SelectListItemDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetPagedList([FromQuery] PagedListRequestDto request)
     {
@@ -38,6 +38,7 @@ public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
     }
 
     [HttpGet("select-list-item")]
+    [AuthorizePermission(Core.Enums.PermissionMatchTypeEnum.Any, PermissionCodeConstant.User.ViewUser)]
     [ProducesResponseType(typeof(IList<SelectListItemDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetListItem()
     {
@@ -45,6 +46,7 @@ public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
     }
 
     [HttpGet("work-item-list/{id:int}")]
+    [AuthorizePermission(Core.Enums.PermissionMatchTypeEnum.Any, PermissionCodeConstant.User.ViewUser)]
     [ProducesResponseType(typeof(IList<GetWorkItemListByIdDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetWorkItemListById([FromRoute] int id)
     {
@@ -52,6 +54,7 @@ public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
     }
 
     [HttpPut]
+    [AuthorizePermission(Core.Enums.PermissionMatchTypeEnum.Any, PermissionCodeConstant.User.UpdateUser)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> Delete([FromBody] UpdateUserDto request)
     {
@@ -60,6 +63,7 @@ public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [AuthorizePermission(Core.Enums.PermissionMatchTypeEnum.Any, PermissionCodeConstant.User.DeleteUser)]
     [ProducesResponseType(typeof(IList<SelectListItemDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {

@@ -17,9 +17,9 @@ internal sealed class AuthService(
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppSettings.Jwt.Key));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-        var userRoleIds = user.UserRoles.Select(x => x.RoleId);
-        var roleIds = userRoleIds.Any()
-            ? string.Join(", ", userRoleIds)
+        var userRoleCodes = user.UserRoles.Select(x => x.Role.Code);
+        var roleCodes = userRoleCodes.Any()
+            ? string.Join(", ", userRoleCodes)
             : string.Empty;
 
         var claims = new[]
@@ -28,7 +28,7 @@ internal sealed class AuthService(
             new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.Name, user.FirstName.Trim() + " " + user.LastName.Trim()),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim("RoleIds", roleIds)
+            new Claim("RoleCodes", roleCodes)
         };
 
         var token = new JwtSecurityToken(

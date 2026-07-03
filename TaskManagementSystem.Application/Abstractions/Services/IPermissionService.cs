@@ -2,5 +2,5 @@
 
 public interface IPermissionService
 {
-    Task<bool> HasPermissionAsync(List<int> roleIds, string[] permissionCodes, PermissionMatchTypeEnum type, CancellationToken cancellationToken = default);
+    Task<bool> HasPermissionAsync(List<string> roleCodes, string[] permissionCodes, PermissionMatchTypeEnum type, CancellationToken cancellationToken = default);
 }

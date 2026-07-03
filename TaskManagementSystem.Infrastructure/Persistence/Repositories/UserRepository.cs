@@ -12,7 +12,7 @@ public sealed class UserRepository(ApplicationDbContext dbContext)
     {
         return dbContext.Users.AsNoTracking()
             .Include(x => x.UserRoles)
-            .AsNoTracking()
+            .ThenInclude(ur => ur.Role)
             .Where(x => x.Email.Trim().ToUpper() == email.Trim().ToUpper())
             .FirstOrDefaultAsync();
     }

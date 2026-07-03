@@ -30,11 +30,12 @@ internal sealed class RolePermissionRepository(ApplicationDbContext dbContext)
                 .ToListAsync(cancellationToken);
     }
 
-    public async Task<List<string>> GetPermissionCodesByRoleIdsAsync(List<int> roleIds, CancellationToken cancellationToken = default)
+    public async Task<List<string>> GetPermissionCodesByRoleCodesAsync(List<string> roleCodes, CancellationToken cancellationToken = default)
     {
         var query = from rp in dbContext.RolePermissions
                     join p in dbContext.Permissions on rp.PermissionId equals p.Id
-                    where roleIds.Contains(rp.RoleId)
+                    join r in dbContext.Roles on rp.RoleId equals r.Id
+                    where roleCodes.Contains(r.Code)
                     select p.Code;
 
         return await query.Distinct().ToListAsync(cancellationToken);

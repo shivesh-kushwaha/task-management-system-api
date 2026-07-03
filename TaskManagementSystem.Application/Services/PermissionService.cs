@@ -3,11 +3,11 @@
 internal sealed class PermissionService(
     IRolePermissionRepository rolePermissionRepository) : IPermissionService
 {
-    public async Task<bool> HasPermissionAsync(List<int> roleIds, string[] permissionCodes, PermissionMatchTypeEnum type, CancellationToken cancellationToken = default)
+    public async Task<bool> HasPermissionAsync(List<string> roleCodes, string[] permissionCodes, PermissionMatchTypeEnum type, CancellationToken cancellationToken = default)
     {
         // Fetch all permission codes for the given roles
         var existingPermissionCodes = await rolePermissionRepository
-            .GetPermissionCodesByRoleIdsAsync(roleIds, cancellationToken);
+            .GetPermissionCodesByRoleCodesAsync(roleCodes, cancellationToken);
 
         var permissionSet = new HashSet<string>(permissionCodes);
 
