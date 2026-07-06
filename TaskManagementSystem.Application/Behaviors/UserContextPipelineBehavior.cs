@@ -18,7 +18,7 @@ public sealed class UserContextPipelineBehavior<TRequest, TResponse>(
         var userId = httpContextAccessor.HttpContext?.User?
             .FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-        if (request is BaseCommand baseCommand &&
+        if (request is BaseRequest baseCommand &&
             int.TryParse(userId, out var parsedUserId))
         {
             baseCommand.UserId = parsedUserId;

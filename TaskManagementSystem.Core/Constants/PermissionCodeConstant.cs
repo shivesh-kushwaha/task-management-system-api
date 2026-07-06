@@ -33,4 +33,12 @@ public static class PermissionCodeConstant
         public const string UpdateWorkItem = "UPDATE_WORK_ITEM";
         public const string DeleteWorkItem = "DELETE_WORK_ITEM";
     }
+
+    public static class Message
+    {
+        public const string AddMessage = "ADD_MESSAGE";
+        public const string ViewMessage = "VIEW_MESSAGE";
+        public const string UpdateMessage = "UPDATE_MESSAGE";
+        public const string DeleteMessage = "DELETE_MESSAGE";
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace TaskManagementSystem.Application.Commands.User.UpdateUser;
 
-public class UpdateUserCommand : BaseCommand, ICommand
+public class UpdateUserCommand : BaseRequest, ICommand
 {
     public int Id { get; set; }
     public string FirstName { get; set; } = null!;

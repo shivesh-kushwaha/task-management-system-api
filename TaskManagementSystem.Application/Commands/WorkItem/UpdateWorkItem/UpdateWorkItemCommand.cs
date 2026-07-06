@@ -2,7 +2,7 @@
 
 namespace TaskManagementSystem.Application.Commands.WorkItem.UpdateWorkItem;
 
-public class UpdateWorkItemCommand : BaseCommand, ICommand
+public class UpdateWorkItemCommand : BaseRequest, ICommand
 {
     public int Id { get; set; }
     public int? ProjectId { get; set; }

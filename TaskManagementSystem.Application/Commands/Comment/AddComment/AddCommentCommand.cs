@@ -2,7 +2,7 @@
 
 namespace TaskManagementSystem.Application.Commands.Comment.AddComment;
 
-public class AddCommentCommand: BaseCommand, ICommand
+public class AddCommentCommand: BaseRequest, ICommand
 {
     public string Description { get; set; } = null!;
     public TypeEnum Type { get; set; }

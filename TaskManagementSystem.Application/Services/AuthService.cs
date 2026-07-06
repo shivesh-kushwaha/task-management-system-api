@@ -28,7 +28,7 @@ internal sealed class AuthService(
             new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.Name, user.FirstName.Trim() + " " + user.LastName.Trim()),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim("RoleCodes", roleCodes)
+            new Claim("roleCodes", roleCodes)
         };
 
         var token = new JwtSecurityToken(

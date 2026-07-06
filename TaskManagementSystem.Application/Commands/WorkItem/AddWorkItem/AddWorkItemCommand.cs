@@ -2,7 +2,7 @@
 
 namespace TaskManagementSystem.Application.Commands.WorkItem.AddWorkItem;
 
-public class AddWorkItemCommand: BaseCommand, ICommand
+public class AddWorkItemCommand: BaseRequest, ICommand
 {
     public int? ProjectId { get; set; }
     public int? ParentId { get; set; }

@@ -2,7 +2,7 @@
 
 namespace TaskManagementSystem.Application.Commands.User.DeleteUser;
 
-public class DeleteUserCommand : BaseCommand, ICommand
+public class DeleteUserCommand : BaseRequest, ICommand
 {
     public int Id { get; set; }
 }

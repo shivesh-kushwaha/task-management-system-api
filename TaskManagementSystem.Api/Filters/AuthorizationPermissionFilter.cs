@@ -11,6 +11,7 @@ public class AuthorizationPermissionFilter
     {
         private readonly string[] _requiredPermissions;
         private readonly PermissionMatchTypeEnum _matchType;
+        private readonly string _accessDeniedMessage = "Access denied, please contact to your administractor!";
 
         public AuthorizePermissionAttribute(PermissionMatchTypeEnum matchType, params string[] permissions)
         {
@@ -23,14 +24,14 @@ public class AuthorizationPermissionFilter
             var user = context.HttpContext.User;
             if (user?.Identity == null || !user.Identity.IsAuthenticated)
             {
-                throw new UnauthorizedAccessException("Access denied!");
+                throw new UnauthorizedAccessException(_accessDeniedMessage);
             }
 
-            var roleCodesClaim = user.FindFirst("RoleCodes")?.Value;
+            var roleCodesClaim = user.FindFirst("roleCodes")?.Value;
 
             if (string.IsNullOrEmpty(roleCodesClaim))
             {
-                throw new UnauthorizedAccessException("Access denied!");
+                throw new UnauthorizedAccessException(_accessDeniedMessage);
             }
 
             var roleCodes = roleCodesClaim
@@ -40,7 +41,7 @@ public class AuthorizationPermissionFilter
 
             if (!roleCodes.Any())
             {
-                throw new UnauthorizedAccessException("Access denied!");
+                throw new UnauthorizedAccessException(_accessDeniedMessage);
             }
 
             var permissionService = context.HttpContext.RequestServices
@@ -54,7 +55,7 @@ public class AuthorizationPermissionFilter
 
             if (!hasPermissions)
             {
-                throw new UnauthorizedAccessException("Access denied!");
+                throw new UnauthorizedAccessException(_accessDeniedMessage);
             }
         }
     }

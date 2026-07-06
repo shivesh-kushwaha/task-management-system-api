@@ -2,7 +2,7 @@
 
 namespace TaskManagementSystem.Application.Commands.Team.AddTeam;
 
-public sealed class AddTeamCommand : BaseCommand, ICommand
+public sealed class AddTeamCommand : BaseRequest, ICommand
 {
     public string Name { get; set; } = null!;
     public string? Description { get; set; }

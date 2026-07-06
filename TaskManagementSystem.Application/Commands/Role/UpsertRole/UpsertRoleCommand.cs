@@ -1,6 +1,6 @@
 ﻿namespace TaskManagementSystem.Application.Commands.Role.UpsertRole;
 
-public class UpsertRoleCommand : BaseCommand, ICommand
+public class UpsertRoleCommand : BaseRequest, ICommand
 {
     public int? Id { get; set; }
     public string Name { get; set; } = null!;

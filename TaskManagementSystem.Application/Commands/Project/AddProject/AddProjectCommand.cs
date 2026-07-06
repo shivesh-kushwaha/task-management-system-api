@@ -2,7 +2,7 @@
 
 namespace TaskManagementSystem.Application.Commands.Project.AddProject;
 
-public class AddProjectCommand: BaseCommand, ICommand
+public class AddProjectCommand: BaseRequest, ICommand
 {
     public string Name { get; set; } = null!;
     public string? Description { get; set; }

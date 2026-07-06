@@ -2,7 +2,7 @@
 
 namespace TaskManagementSystem.Application.Commands.Project.UpdateProject;
 
-public class UpdateProjectCommand: BaseCommand, ICommand
+public class UpdateProjectCommand: BaseRequest, ICommand
 {
     public int Id {  get; set; }
     public string Name { get; set; } = null!;

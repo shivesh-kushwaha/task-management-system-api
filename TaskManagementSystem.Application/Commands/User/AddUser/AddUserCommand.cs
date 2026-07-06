@@ -2,7 +2,7 @@
 
 namespace TaskManagementSystem.Application.Commands.User.AddUser;
 
-public class AddUserCommand: BaseCommand, ICommand
+public class AddUserCommand: BaseRequest, ICommand
 {
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
