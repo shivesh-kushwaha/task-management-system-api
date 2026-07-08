@@ -1,4 +1,5 @@
 ﻿using TaskManagementSystem.Core.Dtos;
+using TaskManagementSystem.Core.Dtos.User.GetUserById;
 using TaskManagementSystem.Core.Dtos.User.GetUserPagedList;
 using TaskManagementSystem.Core.Dtos.User.GetWorkItemListById;
 using TaskManagementSystem.Core.Entities;
@@ -89,6 +90,49 @@ public sealed class UserRepository(ApplicationDbContext dbContext)
                     WorkItemParentId = w.ParentId,
                     ProjectId = project != null ? project.Id : 0,
                     ProjectName = project != null ? project.Name : "-",
+
                 }).ToListAsync(cancellationToken);
+    }
+
+    public async Task<GetUserByIdDto?> GetUserByIdAsync(int id, CancellationToken cancellationToken = default)
+    {
+        var query = from u in dbContext.Users.AsNoTracking()
+                    where u.Id == id && u.Status != RecordStatusEnum.Deleted
+                    join createdBy in dbContext.Users.AsNoTracking()
+                        on u.CreatedById equals createdBy.Id into createdByGroup
+                    from createdUser in createdByGroup.DefaultIfEmpty()
+                    join updatedBy in dbContext.Users.AsNoTracking()
+                        on u.UpdatedById equals updatedBy.Id into updatedByGroup
+                    from updatedUser in updatedByGroup.DefaultIfEmpty()
+                    join ur in dbContext.UserRoles.AsNoTracking() on u.Id equals ur.UserId into userRoles
+                    where userRoles.Any(ur => ur.Status != RecordStatusEnum.Deleted
+                                              && ur.Role.Status != RecordStatusEnum.Deleted)
+                    select new GetUserByIdDto
+                    {
+                        Id = u.Id,
+                        Name = u.FirstName + " " + u.LastName,
+                        Email = u.Email,
+                        CreatedAt = u.CreatedAt,
+                        UpdatedAt = u.UpdatedAt,
+                        Status = u.Status,
+                        // User information (from base DTO)
+                        CreatedByFirstName = createdUser != null ? createdUser.FirstName : null,
+                        CreatedByLastName = createdUser != null ? createdUser.LastName : null,
+                        UpdatedByFirstName = updatedUser != null ? updatedUser.FirstName : null,
+                        UpdatedByLastName = updatedUser != null ? updatedUser.LastName : null,
+                        // Roles
+                        Roles = userRoles
+                            .Where(ur => ur.Status != RecordStatusEnum.Deleted
+                                         && ur.Role.Status != RecordStatusEnum.Deleted)
+                            .Select(ur => new SelectListItemDto
+                            {
+                                Key = ur.Role.Id,
+                                Value = ur.Role.Name
+                            })
+                            .OrderBy(r => r.Value)
+                            .ToList()
+                    };
+
+        return await query.FirstOrDefaultAsync(cancellationToken);
     }
 }

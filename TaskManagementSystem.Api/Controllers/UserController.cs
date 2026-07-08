@@ -1,11 +1,13 @@
 ﻿using TaskManagementSystem.Application.Commands.User.AddUser;
 using TaskManagementSystem.Application.Commands.User.DeleteUser;
 using TaskManagementSystem.Application.Commands.User.UpdateUser;
+using TaskManagementSystem.Application.Queries.User.GetUserById;
 using TaskManagementSystem.Application.Queries.User.GetUserListItem;
 using TaskManagementSystem.Application.Queries.User.GetUserPagedList;
 using TaskManagementSystem.Application.Queries.User.GetWorkItemListById;
 using TaskManagementSystem.Core.Dtos;
 using TaskManagementSystem.Core.Dtos.User.AddUser;
+using TaskManagementSystem.Core.Dtos.User.GetUserById;
 using TaskManagementSystem.Core.Dtos.User.GetWorkItemListById;
 using TaskManagementSystem.Core.Dtos.User.UpdateUser;
 
@@ -47,6 +49,14 @@ public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
     {
         return Ok(await mediator.Send(new GetWorkItemListByIdQuery { Id = id }));
     }
+    
+    [HttpGet("{id:int}")]
+    [AuthorizePermission(Core.Enums.PermissionMatchTypeEnum.Any, PermissionCodeConstant.User.ViewUser)]
+    [ProducesResponseType(typeof(GetUserByIdDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetById([FromRoute] int id)
+    {
+        return Ok(await mediator.Send(new GetUserByIdQuery { Id = id }));
+    }
 
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -54,7 +64,7 @@ public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
     {
         await mediator.Send(mapper.Map<UpdateUserCommand>(request));
         return Ok();
-    }
+    }    
 
     [HttpDelete("{id:int}")]
     [ProducesResponseType(typeof(IList<SelectListItemDto>), StatusCodes.Status200OK)]
