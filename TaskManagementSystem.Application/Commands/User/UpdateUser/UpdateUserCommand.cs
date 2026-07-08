@@ -1,6 +1,8 @@
-﻿namespace TaskManagementSystem.Application.Commands.User.UpdateUser;
+﻿using TaskManagementSystem.Application.Abstractions;
 
-public class UpdateUserCommand : BaseCommand, ICommand
+namespace TaskManagementSystem.Application.Commands.User.UpdateUser;
+
+public class UpdateUserCommand : BaseRequest, ICommand
 {
     public int Id { get; set; }
     public string FirstName { get; set; } = null!;

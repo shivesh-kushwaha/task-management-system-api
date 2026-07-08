@@ -1,6 +1,8 @@
-﻿namespace TaskManagementSystem.Application.Commands.Team.UpdateTeam;
+﻿using TaskManagementSystem.Application.Abstractions;
 
-public class UpdateTeamCommand : BaseCommand, ICommand
+namespace TaskManagementSystem.Application.Commands.Team.UpdateTeam;
+
+public class UpdateTeamCommand : BaseRequest, ICommand
 {
     public int Id { get; set; }
     public string Name { get; set; } = null!;

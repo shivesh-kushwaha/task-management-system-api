@@ -1,6 +1,8 @@
-﻿namespace TaskManagementSystem.Application.Commands.Project.UpdateProject;
+﻿using TaskManagementSystem.Application.Abstractions;
 
-public class UpdateProjectCommand: BaseCommand, ICommand
+namespace TaskManagementSystem.Application.Commands.Project.UpdateProject;
+
+public class UpdateProjectCommand: BaseRequest, ICommand
 {
     public int Id {  get; set; }
     public string Name { get; set; } = null!;

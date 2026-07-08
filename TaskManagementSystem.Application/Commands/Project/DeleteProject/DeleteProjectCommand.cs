@@ -1,6 +1,8 @@
-﻿namespace TaskManagementSystem.Application.Commands.Project.DeleteProject;
+﻿using TaskManagementSystem.Application.Abstractions;
 
-public class DeleteProjectCommand: BaseCommand, ICommand
+namespace TaskManagementSystem.Application.Commands.Project.DeleteProject;
+
+public class DeleteProjectCommand: BaseRequest, ICommand
 {
     public int Id { get; set; }
 }

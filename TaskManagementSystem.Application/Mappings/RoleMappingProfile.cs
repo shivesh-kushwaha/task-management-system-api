@@ -1,12 +1,18 @@
-﻿using TaskManagementSystem.Application.Commands.Role.AddRole;
-using TaskManagementSystem.Application.Commands.Role.Dtos;
+﻿using TaskManagementSystem.Application.Commands.Role.UpsertRole;
+using TaskManagementSystem.Application.Queries.Role.GetRolePagedList;
+using TaskManagementSystem.Core.Dtos.Role.UpsertRole;
 
 namespace TaskManagementSystem.Application.Mappings;
 
-internal sealed class RoleMappingProfile: Profile
+internal sealed class RoleMappingProfile : Profile
 {
     public RoleMappingProfile()
     {
-        CreateMap<AddRoleDto, AddRoleCommand>();
+        // Commands
+        CreateMap<UpsertRoleDto, UpsertRoleCommand>();
+
+        // Queries
+        CreateMap<PagedListRequestDto, GetRolePagedListQuery>()
+            .ForMember(src => src.Filter, opt => opt.MapFrom(dest => dest));
     }
 }

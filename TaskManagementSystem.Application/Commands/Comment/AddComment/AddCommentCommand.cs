@@ -1,6 +1,8 @@
-﻿namespace TaskManagementSystem.Application.Commands.Comment.AddComment;
+﻿using TaskManagementSystem.Application.Abstractions;
 
-public class AddCommentCommand: BaseCommand, ICommand
+namespace TaskManagementSystem.Application.Commands.Comment.AddComment;
+
+public class AddCommentCommand: BaseRequest, ICommand
 {
     public string Description { get; set; } = null!;
     public TypeEnum Type { get; set; }

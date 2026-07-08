@@ -2,7 +2,7 @@
 
 namespace TaskManagementSystem.Infrastructure.Persistence.Configurations;
 
-public sealed class RoleConfiguration: BaseEntityConfiguration<Role>
+public sealed class RoleConfiguration : BaseEntityConfiguration<Role>
 {
     public override void Configure(EntityTypeBuilder<Role> builder)
     {
@@ -14,7 +14,13 @@ public sealed class RoleConfiguration: BaseEntityConfiguration<Role>
             .HasMaxLength(50)
             .IsRequired();
 
-        builder.HasIndex(x => x.Name)
+        builder.Property(x => x.Code)
+            .IsRequired();
+
+        builder.Property(x => x.Description)
+            .HasMaxLength(200);
+
+        builder.HasIndex(x => x.Code)
             .IsUnique();
     }
 }

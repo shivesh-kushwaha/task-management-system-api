@@ -1,6 +1,8 @@
-﻿namespace TaskManagementSystem.Application.Commands.WorkItem.AddWorkItem;
+﻿using TaskManagementSystem.Application.Abstractions;
 
-public class AddWorkItemCommand: BaseCommand, ICommand
+namespace TaskManagementSystem.Application.Commands.WorkItem.AddWorkItem;
+
+public class AddWorkItemCommand: BaseRequest, ICommand
 {
     public int? ProjectId { get; set; }
     public int? ParentId { get; set; }

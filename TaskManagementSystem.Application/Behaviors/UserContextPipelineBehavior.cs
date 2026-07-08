@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
-using TaskManagementSystem.Application.Commands;
+using TaskManagementSystem.Application.Abstractions;
 
 namespace TaskManagementSystem.Application.Behaviors;
 
@@ -18,7 +18,7 @@ public sealed class UserContextPipelineBehavior<TRequest, TResponse>(
         var userId = httpContextAccessor.HttpContext?.User?
             .FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-        if (request is BaseCommand baseCommand &&
+        if (request is BaseRequest baseCommand &&
             int.TryParse(userId, out var parsedUserId))
         {
             baseCommand.UserId = parsedUserId;

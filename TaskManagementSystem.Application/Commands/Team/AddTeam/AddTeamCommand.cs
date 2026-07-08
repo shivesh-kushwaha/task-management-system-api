@@ -1,6 +1,8 @@
-﻿namespace TaskManagementSystem.Application.Commands.Team.AddTeam;
+﻿using TaskManagementSystem.Application.Abstractions;
 
-public sealed class AddTeamCommand : BaseCommand, ICommand
+namespace TaskManagementSystem.Application.Commands.Team.AddTeam;
+
+public sealed class AddTeamCommand : BaseRequest, ICommand
 {
     public string Name { get; set; } = null!;
     public string? Description { get; set; }

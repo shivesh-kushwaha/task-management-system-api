@@ -1,6 +1,8 @@
-﻿namespace TaskManagementSystem.Application.Commands.Project.AddProject;
+﻿using TaskManagementSystem.Application.Abstractions;
 
-public class AddProjectCommand: BaseCommand, ICommand
+namespace TaskManagementSystem.Application.Commands.Project.AddProject;
+
+public class AddProjectCommand: BaseRequest, ICommand
 {
     public string Name { get; set; } = null!;
     public string? Description { get; set; }

@@ -12,9 +12,14 @@ public sealed class UserRepository(ApplicationDbContext dbContext)
     public Task<User?> GetUserByEmailAsync(string email)
     {
         return dbContext.Users.AsNoTracking()
-            .Include(x => x.UserRoles)
-            .AsNoTracking()
-            .Where(x => x.Email.Trim().ToUpper() == email.Trim().ToUpper())
+            .Include(x => x.UserRoles
+                .Where(ur => ur.Status != RecordStatusEnum.Deleted          // if UserRole has Status
+                             && ur.Role.Status != RecordStatusEnum.Deleted))
+                .ThenInclude(ur => ur.Role)
+            .Where(x => x.Email.Trim().ToUpper() == email.Trim().ToUpper()
+                        && x.Status != RecordStatusEnum.Deleted
+                        && x.UserRoles.Any(ur => ur.Status != RecordStatusEnum.Deleted
+                                                 && ur.Role.Status != RecordStatusEnum.Deleted))
             .FirstOrDefaultAsync();
     }
 

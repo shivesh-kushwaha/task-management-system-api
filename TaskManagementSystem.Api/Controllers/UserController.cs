@@ -5,11 +5,13 @@ using TaskManagementSystem.Application.Queries.User.GetUserById;
 using TaskManagementSystem.Application.Queries.User.GetUserListItem;
 using TaskManagementSystem.Application.Queries.User.GetUserPagedList;
 using TaskManagementSystem.Application.Queries.User.GetWorkItemListById;
+using TaskManagementSystem.Core.Constants;
 using TaskManagementSystem.Core.Dtos;
 using TaskManagementSystem.Core.Dtos.User.AddUser;
 using TaskManagementSystem.Core.Dtos.User.GetUserById;
 using TaskManagementSystem.Core.Dtos.User.GetWorkItemListById;
 using TaskManagementSystem.Core.Dtos.User.UpdateUser;
+using static TaskManagementSystem.Api.Filters.AuthorizationPermissionFilter;
 
 namespace TaskManagementSystem.Api.Controllers;
 
@@ -29,6 +31,7 @@ public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
     }
 
     [HttpGet("paged-list")]
+    [AuthorizePermission(Core.Enums.PermissionMatchTypeEnum.Any, PermissionCodeConstant.User.AddUser)]
     [ProducesResponseType(typeof(IList<SelectListItemDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetPagedList([FromQuery] PagedListRequestDto request)
     {
@@ -37,6 +40,7 @@ public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
     }
 
     [HttpGet("select-list-item")]
+    [AuthorizePermission(Core.Enums.PermissionMatchTypeEnum.Any, PermissionCodeConstant.User.ViewUser)]
     [ProducesResponseType(typeof(IList<SelectListItemDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetListItem()
     {
@@ -44,6 +48,7 @@ public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
     }
 
     [HttpGet("work-item-list/{id:int}")]
+    [AuthorizePermission(Core.Enums.PermissionMatchTypeEnum.Any, PermissionCodeConstant.User.ViewUser)]
     [ProducesResponseType(typeof(IList<GetWorkItemListByIdDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetWorkItemListById([FromRoute] int id)
     {
@@ -59,6 +64,7 @@ public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
     }
 
     [HttpPut]
+    [AuthorizePermission(Core.Enums.PermissionMatchTypeEnum.Any, PermissionCodeConstant.User.UpdateUser)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> Delete([FromBody] UpdateUserDto request)
     {
@@ -67,6 +73,7 @@ public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
     }    
 
     [HttpDelete("{id:int}")]
+    [AuthorizePermission(Core.Enums.PermissionMatchTypeEnum.Any, PermissionCodeConstant.User.DeleteUser)]
     [ProducesResponseType(typeof(IList<SelectListItemDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
