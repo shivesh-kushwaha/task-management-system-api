@@ -1,10 +1,12 @@
 ﻿using TaskManagementSystem.Application.Commands.User.AddUser;
 using TaskManagementSystem.Application.Commands.User.DeleteUser;
 using TaskManagementSystem.Application.Commands.User.Dtos;
+using TaskManagementSystem.Application.Queries.User.GetUserById;
 using TaskManagementSystem.Application.Queries.User.GetUserListItem;
 using TaskManagementSystem.Application.Queries.User.GetUserPagedList;
 using TaskManagementSystem.Application.Queries.User.GetWorkItemListById;
 using TaskManagementSystem.Core.Dtos;
+using TaskManagementSystem.Core.Dtos.User.GetUserById;
 using TaskManagementSystem.Core.Dtos.User.GetWorkItemListById;
 
 namespace TaskManagementSystem.Api.Controllers;
@@ -44,6 +46,14 @@ public class UserController(IMapper mapper, IMediator mediator) : ControllerBase
     public async Task<IActionResult> GetWorkItemListById([FromRoute] int id)
     {
         return Ok(await mediator.Send(new GetWorkItemListByIdQuery { Id = id }));
+    }
+
+    [HttpGet("{id:int}")]
+    [AuthorizePermission(Core.Enums.PermissionMatchTypeEnum.Any, PermissionCodeConstant.User.ViewUser)]
+    [ProducesResponseType(typeof(GetUserByIdDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetById([FromRoute] int id)
+    {
+        return Ok(await mediator.Send(new GetUserByIdQuery { Id = id }));
     }
 
     [HttpDelete("{id:int}")]
