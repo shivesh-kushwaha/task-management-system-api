@@ -31,4 +31,14 @@ public static class TableNames
     {
         public const string Notifications = "Notifications";
     }
+
+    public static class Logging
+    {
+        public const string ExceptionLogs = "ExceptionLogs";
+    }
+
+    public static class Storage
+    {
+        public const string Attachments = "Attachments";
+    }
 }

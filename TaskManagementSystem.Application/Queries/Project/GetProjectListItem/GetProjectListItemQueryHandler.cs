@@ -5,6 +5,8 @@ internal sealed class GetProjectListItemQueryHandler(IProjectRepository projectR
 {
     public async Task<IList<SelectListItemDto>> Handle(GetProjectListItemQuery request, CancellationToken cancellationToken)
     {
+        throw new NotImplementedException(); // xRemove it after the completion of Exception.
+
         return await projectRepository
             .AsQueryable()
             .AsNoTracking()

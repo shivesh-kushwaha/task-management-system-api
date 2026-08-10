@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using TaskManagementSystem.Core.Dtos;
+﻿using TaskManagementSystem.Core.Dtos;
 using TaskManagementSystem.Core.Dtos.Project.GetProjectById;
 using TaskManagementSystem.Core.Dtos.Project.GetProjectPagedList;
 using TaskManagementSystem.Core.Entities;
@@ -43,7 +42,7 @@ internal sealed class ProjectRepository(ApplicationDbContext dbContext)
 
         return await query.SingleOrDefaultAsync(cancellationToken);
     }
-    
+
     public async Task<PagedListResponseDto<GetProjectPagedListDto>> GetPagedListAsync(
     PagedListRequestDto request,
     CancellationToken cancellationToken)
@@ -69,8 +68,8 @@ internal sealed class ProjectRepository(ApplicationDbContext dbContext)
         {
             var filterKey = request.FilterKey.Trim().ToUpper();
             query = query.Where(x =>
-                EF.Functions.Like(x.p.Name.Trim().ToUpper(), $"%{filterKey}%") 
-                || (x.user != null 
+                EF.Functions.Like(x.p.Name.Trim().ToUpper(), $"%{filterKey}%")
+                || (x.user != null
                     && EF.Functions.Like((x.user.FirstName.Trim() + " " + x.user.LastName.Trim()).ToUpper(), $"%{filterKey}%"))
             );
         }

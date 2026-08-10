@@ -15,4 +15,10 @@ public static class AppSettings
         public static int ExpiryMinutes { get; set; }
         public static int ExpiryDays { get; set; }
     }
+
+    public static class Attachment
+    {
+        public static long MaxFileSize { get; set; }
+        public static string[] AllowedExtensions { get; set; } = [];
+    }
 }
