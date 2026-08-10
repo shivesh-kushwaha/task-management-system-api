@@ -1,4 +1,4 @@
-﻿namespace TaskManagementSystem.Application.Commands.Auth.Dtos;
+﻿namespace TaskManagementSystem.Core.Dtos.Auth.AuthLogin;
 
 public sealed record AuthLoginDto
 {

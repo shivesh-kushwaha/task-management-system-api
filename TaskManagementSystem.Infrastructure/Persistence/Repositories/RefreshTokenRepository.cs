@@ -1,5 +1,4 @@
 ﻿using TaskManagementSystem.Core.Entities;
-using TaskManagementSystem.Core.Enums;
 
 namespace TaskManagementSystem.Infrastructure.Persistence.Repositories;
 
@@ -24,7 +23,7 @@ internal sealed class RefreshTokenRepository(ApplicationDbContext dbContext)
     public async Task<List<RefreshToken>> GetListByUserIdAsync(int userId, CancellationToken cancellationToken)
     {
         return await dbContext.RefreshTokens
-            .Where(x => x.Status != (int)RecordStatusEnum.Deleted
+            .Where(x => x.Status != RecordStatusEnum.Deleted
                 && x.UserId == userId)
             .ToListAsync(cancellationToken);
     }
@@ -33,7 +32,7 @@ internal sealed class RefreshTokenRepository(ApplicationDbContext dbContext)
     {
         return await dbContext.RefreshTokens
             .AsNoTracking()
-            .FirstOrDefaultAsync(x => x.Status != (int)RecordStatusEnum.Deleted
+            .FirstOrDefaultAsync(x => x.Status != RecordStatusEnum.Deleted
                 && x.Token.Trim().ToUpper() == token.Trim().ToUpper(),
              cancellationToken);
     }

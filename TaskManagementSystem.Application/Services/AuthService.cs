@@ -48,7 +48,7 @@ internal sealed class AuthService(
 
         foreach (var existingRefreshToken in existingRefreshTokens)
         {
-            existingRefreshToken.Status = (int)RecordStatusEnum.Deleted;
+            existingRefreshToken.Status = RecordStatusEnum.Deleted;
             existingRefreshToken.DeletedAt = Core.Helpers.Utility.GetCurrentDateTimeOffset();
         }
 
@@ -67,7 +67,7 @@ internal sealed class AuthService(
             Token = token,
             ExpiresAt = expiresAt,
             CreatedAt = Core.Helpers.Utility.GetCurrentDateTimeOffset(),
-            Status = (int)RecordStatusEnum.Active
+            Status = RecordStatusEnum.Active
         };
 
         await refreshTokenRepository.AddAsync(refreshToken, cancellationToken);

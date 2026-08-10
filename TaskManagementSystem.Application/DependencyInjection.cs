@@ -28,10 +28,13 @@ public static class DependencyInjection
         services.AddAutoMapper(cfg => cfg.AddProfile<Mappings.CommentMappingProfile>());
         services.AddAutoMapper(cfg => cfg.AddProfile<Mappings.PermissionMappingProfile>());
         services.AddAutoMapper(cfg => cfg.AddProfile<Mappings.RolePermissionMappingProfile>());
+        services.AddAutoMapper(cfg => cfg.AddProfile<Mappings.ExceptionLogMappingProfile>());
 
         // Services
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IPermissionService, PermissionService>();
+        services.AddScoped<IExceptionLogService, ExceptionLogService>();
+        services.AddScoped<IAttachmentService, AttachmentService>();
 
         return services;
     }

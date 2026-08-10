@@ -5,4 +5,7 @@ public enum TypeEnum
     Project = 1,
     Team = 2,
     WorkItem = 3,
+    User = 4,
+    Comment,
+    Other = 100
 }

@@ -1,5 +1,5 @@
 ﻿using TaskManagementSystem.Application.Commands.Comment.AddComment;
-using TaskManagementSystem.Application.Commands.Comment.Dtos;
+using TaskManagementSystem.Core.Dtos.Comment.AddComment;
 
 namespace TaskManagementSystem.Application.Mappings;
 

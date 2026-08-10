@@ -1,6 +1,6 @@
-﻿namespace TaskManagementSystem.Application.Commands.Comment.Dtos;
+﻿namespace TaskManagementSystem.Core.Dtos.Comment.AddComment;
 
-public sealed class AddCommentDto
+public sealed record AddCommentDto
 {
     public string Description { get; set; } = null!;
     public TypeEnum Type { get; set; }

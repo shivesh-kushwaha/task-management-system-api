@@ -19,6 +19,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<TeamMember> TeamMembers => Set<TeamMember>();
     public DbSet<WorkItem> WorkItems => Set<WorkItem>();
     public DbSet<WorkItemType> WorkItemTypes => Set<WorkItemType>();
+    public DbSet<ExceptionLog> ExceptionLogs => Set<ExceptionLog>();
+    public DbSet<Attachment> Attachments => Set<Attachment>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
