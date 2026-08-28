@@ -6,6 +6,6 @@ public enum TypeEnum
     Team = 2,
     WorkItem = 3,
     User = 4,
-    Comment,
+    Comment = 5,
     Other = 100
 }
