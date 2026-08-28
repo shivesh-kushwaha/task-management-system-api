@@ -4,5 +4,5 @@ public sealed class Comment: BaseEntity
 {
     public string Description { get; set; } = null!;
     public TypeEnum Type { get; set; }
-    public int TypeId { get; set; }
+    public int TypeId { get; set; } 
 }
